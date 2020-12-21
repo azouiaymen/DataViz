@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link href="css/index.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="part1">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">pollution & Aviation</a>
+          </div>
+          <br />
+
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#viz1">Taux d'émission</a></li>
+            <li><a href="#">Pollution Atmosphérique</a></li>
+            <li><a href="#">Trafic d'aviation</a></li>
+          </ul>
+        </div>
+      </nav>
+      <br /><br /><br /><br />
+      <header>
+        <h1 class="bienvenue">Bienvenue Sur Notre Visualisation</h1>
+        <div class="text">
+          <p class="presentation">
+            Ce site est un outil de visualisation et de comparaison du taux de
+            pollution emmis par chaque vol, ainsi que l’évolution du taux de gaz
+            emis par les avions (PM25 NO2 NO3) dans certains régions ou
+            certaines villes de France.
+          </p>
+        </div>
+      </header>
+      <button><a href="#viz1">Commencer la visualisation!</a></button>
+      <br />
+      <br />
+    </div>
+    <br />
+    <br />
+
+    <div id="viz1">
+      <div class="date">
+        <label for="start">date:</label>
+
+        <input
+          type="date"
+          id="start"
+          name="trip-start"
+          value="2018-07-22"
+          min="2018-01-01"
+          max="2018-12-31"
+        />
+      </div>
+      <div class="polluant">
+        <label for="polluant">polluant</label>
+
+        <select id="polluant">
+          <option value="NO3">NO3</option>
+          <option value="PM25">PM25</option>
+          <option value="O3">O3</option>
+        </select>
+      </div>
+      <div class="region">
+        <label for="region">Région</label>
+
+        <select id="region">
+          <option value="Paris">Paris</option>
+          <option value="Lyon">Lyon</option>
+          <option value="Lille">Lille</option>
+        </select>
+      </div>
+      <br />
+      <div id="carte">
+        <script>
+          var width = 700,
+            height = 580;
+          var svg = d3
+            .select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+          var g = svg.append("g");
+
+          var projection = d3
+            .geoConicConformal()
+            .center([2.454071, 46.279229])
+            .scale(2800);
+
+          var path = d3.geoPath().projection(projection);
+
+          d3.json("france.json").then(function (jsondata) {
+            g.selectAll("path")
+              .data(jsondata.features)
+              .enter()
+              .append("path")
+              .attr("fill", "#ccc")
+              .attr("d", path);
+          });
+        </script>
+      </div>
+    </div>
+    <footer>
+      <section id="contact" style="padding: 8rem 0;">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+              <hr class="my-4" />
+              <p class="presentation">
+                Voulez-vous voir les détails de ce projet? <br />
+                Avez-vous des questions? <br />
+                Visitez notre GitHub ou envoyez-nous un e-mail et nous
+                reviendrons vers vous dès que possible!
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div id="gauche">
+              <i class="fa fa-github fa-3x mb-3"></i>
+              <p>
+                <a href="https://github.com/ly-ry">Lydia</a>
+              </p>
+              <p>
+                <a href="https://github.com/rym69">Ryma</a>
+              </p>
+              <p>
+                <a href="https://github.com/azouiaymen">Aymen</a>
+              </p>
+              <p>
+                <a href="https://github.com/vizenco">Viencent</a>
+              </p>
+            </div>
+            <div id="droite">
+              <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+              <p>
+                <a href="mailto:lydiasaidj20@gmail.com"
+                  >lydiasaidj20@gmail.com</a
+                >
+              </p>
+              <p>
+                <a href="mailto:bouiche.rima@gmail.com"
+                  >bouiche.rima@gmail.com</a
+                >
+              </p>
+              <p>
+                <a href="mailto:azouiaymen97@gmail.com"
+                  >azouiaymen97@gmail.com</a
+                >
+              </p>
+
+              <p>
+                <a href="mailto:vincent.toinon@outlook.fr"
+                  >vincent.toinon@outlook.fr</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
+
