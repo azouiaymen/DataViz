@@ -106,8 +106,66 @@
               .attr("d", path);
           });
         </script>
+			</div>
+		</div>
+
+		<!-- ********************************************** 2eme visu ********************************************** -->
+
+		<section id="viz2"> 
+			<div>
+				<div class="col-lg-8 mx-auto text-center">
+					<h2 class="section-heading">Pourcentage de pollution en France entre l'année 20.. et 20..</h2>
+					<hr class="my-4">
+					<p class="text-center">Analyse les differents polluants et leur moyenne par rapport à la régions en cliquant dessus </p>
+						<div style="margin-left:600px;">
+								<form>
+										<label><input type="radio" name="all" id="all" value="Choisir"> Région</label>
+								</form>
+						</div>
+						<div class="col-8">
+								<div class="svg3">
+								</div>
+						</div>
+
+					<script>
+						var xScale = d3.scaleLinear()
+														.domain([0, 10]) 
+														.range([10, 300]);
+						var yScale = d3.scaleLinear()	
+														.domain([0, 10]) 	
+														.range([10, 300]);					
+						var svg2 = d3
+							.select("body")
+							.append("svg")
+							.attr("width", width)
+							.attr("height", height);
+						svg2.append('g')
+								.attr('transform', 'translate(0, 300)')
+								.call(d3.axisBottom(xScale));
+						svg2.append('g')
+								.call(d3.axisRight(yScale).ticks(10))
+					</script>
+				</div>
+			</div>
+		</section>
+<!--****** Tuto pour expliquer le fonctionnement du site ****** -->
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Conclusion</h2>
+            <hr class="my-4" />
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="container">
+				<div class="row" style="margin-left: 110px;">
+					
+					<h3 class="section-heading"> Tuto pour expliquer le fonctionnement du site </h2>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <section id="contact" style="padding: 8rem 0;">
         <div class="container">
@@ -168,4 +226,3 @@
     </footer>
   </body>
 </html>
-
