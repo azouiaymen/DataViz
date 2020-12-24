@@ -123,16 +123,55 @@
 								</form>
 						</div>
 						<div class="col-8">
-								<div class="svg3">
+								<div class="svg2">
 								</div>
 						</div>
 
 					<script>
-						var xScale = d3.scaleLinear()
+ 					console.log("DEBUT SCRIPT DE RYMA : ");
+
+						var width = 400, height = 400;
+
+						var data = [10, 15, 20, 25, 30];
+						var svg2 = d3.select("body")
+						    .selectAll("div.svg2")
+								.append("svg")
+								.attr("width", width)
+								.attr("height", height);
+
+						var xscale = d3.scaleLinear()
+								.domain([0, d3.max(data)])
+								.range([0, width - 100]);
+
+						var yscale = d3.scaleLinear()
+										.domain([0, d3.max(data)])
+										.range([height/2, 0]);
+
+						var x_axis = d3.axisBottom()
+										.scale(xscale);
+
+						var y_axis = d3.axisLeft()
+										.scale(yscale);
+
+						svg2.append("g")
+									.attr("transform", "translate(50, 10)")
+									.call(y_axis);
+
+						var xAxisTranslate = height/2 + 10;
+
+						svg2.append("g")
+										.attr("transform", "translate(50, " + xAxisTranslate  +")")
+										.call(x_axis)
+
+					/*	d3.csv("test.csv", function(data) {
+							var minG = parseFloat(Object.values(data[0])[1]);
+							console.log("varrrrrrrrrrrrrrrrrrrr " + minG);
+						});
+							var xScale = d3.scaleLinear()
 														.domain([0, 10]) 
 														.range([10, 300]);
 						var yScale = d3.scaleLinear()	
-														.domain([0, 10]) 	
+														.domain([0,10]) 	
 														.range([10, 300]);					
 						var svg2 = d3
 							.select("body")
@@ -143,7 +182,11 @@
 								.attr('transform', 'translate(0, 300)')
 								.call(d3.axisBottom(xScale));
 						svg2.append('g')
-								.call(d3.axisRight(yScale).ticks(10))
+								.call(d3.axisRight(yScale).ticks(10));*/
+
+				
+
+
 					</script>
 				</div>
 			</div>
