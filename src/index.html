@@ -45,29 +45,40 @@
   <br />
 
   <div id="viz1">
-    <div class="date">
-      <label for="start">date:</label>
+      <span class="date" >
+          <span id="year" class="divRight" >year </span>
+          <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
+         </span>
+          <span class="divRight">
+            <span id="month"> month </span>
+            </span>
+        <span class="divLeft">
+          <input id="slider" type="range"  value="1" min="1" max="12" step="1" />
+         </span>
+     
 
-      <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
-    </div>
-    <div class="polluant">
-      <label for="polluant">polluant</label>
+         <span class="polluant">
+            <span id="polluant">polluant </span>
+            </span>
+        <span class="polluant">
+            <select id="polluant">
+                <option value="NO3">NO3</option>
+                <option value="PM25">PM25</option>
+                <option value="O3">O3</option>
+              </select>
+         </span>
 
-      <select id="polluant">
-        <option value="NO3">NO3</option>
-        <option value="PM25">PM25</option>
-        <option value="O3">O3</option>
-      </select>
-    </div>
-    <div class="region">
-      <label for="region">Région</label>
-
-      <select id="region">
-        <option value="Paris">Paris</option>
-        <option value="Lyon">Lyon</option>
-        <option value="Lille">Lille</option>
-      </select>
-    </div>
+         <span class="region">
+            <span id="region">region </span>
+            </span>
+        <span class="region">
+            <select id="region">
+                <option value="Paris">Paris</option>
+                <option value="Lyon">Lyon</option>
+                <option value="Lille">Lille</option>
+              </select>
+         </span>
+        
     <br />
     <div id="carte">
       <script>
@@ -200,7 +211,7 @@
       </div>
     </div>
   </section>
-
+  
   <footer>
     <section id="contact" style="padding: 8rem 0;">
       <div class="container">
@@ -249,6 +260,7 @@
         </div>
       </div>
     </section>
+  
   </footer>
 </body>
 
