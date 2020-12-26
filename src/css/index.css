@@ -97,16 +97,33 @@ label {
   font: 1rem "Fira Sans", sans-serif;
 }
 
-.date {
+.divLeft {
   float: left;
+  margin-left: 2%;
+}
+.date {
+  margin-right: 2%;
+}
+.divRight {
+  float: left;
+  margin-left: 2%;
+}
+#year {
   margin-left: 5%;
+}
+#polluant,
+#region {
+  float: left;
+  margin-right: 0%;
+  margin-left: 2%;
 }
 .polluant,
 .region {
   float: left;
+  margin-right: 0%;
   margin-left: 2%;
 }
+
 #carte {
   margin: 8%;
 }
-
