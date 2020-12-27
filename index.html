@@ -2,10 +2,10 @@
 <html>
 
 <head>
-  <title>Parcel Sandbox</title>
+  <title>{{page.title}}</title>
   <meta charset="UTF-8" />
   <script src="https://d3js.org/d3.v6.min.js"></script>
-  <link href="./css/index.css" rel="stylesheet" />
+  <link href="css/index.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 </head>
 
@@ -14,7 +14,7 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand">{{"pollution & Aviation" | uppercase}}</a>
+          <a class="navbar-brand">pollution & Aviation</a>
         </div>
         <br />
 
@@ -44,7 +44,7 @@
   <br />
   <br />
 
-  <div id="viz1">
+  <div id="viz1" class="container">
       <span class="date" >
           <span id="year" class="divRight" >year </span>
           <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
