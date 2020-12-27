@@ -1,3 +1,6 @@
+---
+layout: index
+---
 
 ## Welcome to GitHub Pages
 
