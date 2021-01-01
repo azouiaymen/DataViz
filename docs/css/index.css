@@ -2,7 +2,7 @@ html,
 body {
   max-width: 100%;
   overflow-x: hidden;
-  background-color: rgb(161, 146, 120);
+  /*background-color: rgb(161, 146, 120);*/
 }
 body {
   width: 100%;
@@ -10,7 +10,7 @@ body {
 }
 .part1 {
   margin: 0;
-  background-image: url("images/avion2.jpg");
+  background-image: url("../images/zz.jpeg");
   background-size: 100%;
 }
 ul {

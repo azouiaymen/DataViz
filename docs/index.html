@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Parcel Sandbox</title>
+  <title>Pollution Aeronotique</title>
   <meta charset="UTF-8" />
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <link href="./css/index.css" rel="stylesheet" />
@@ -14,9 +14,9 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand">{{"pollution & Aviation" | uppercase}}</a>
+          <a class="navbar-brand">pollution & Aviation</a>
+          <br />
         </div>
-        <br />
 
         <ul class="nav navbar-nav">
           <li class="active"><a href="#viz1">Taux d'émission</a></li>
@@ -45,40 +45,40 @@
   <br />
 
   <div id="viz1">
-      <span class="date" >
-          <span id="year" class="divRight" >year </span>
-          <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
-         </span>
-          <span class="divRight">
-            <span id="month"> month </span>
-            </span>
-        <span class="divLeft">
-          <input id="slider" type="range"  value="1" min="1" max="12" step="1" />
-         </span>
-     
+    <span class="date">
+      <span id="year" class="divRight">year </span>
+      <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
+    </span>
+    <span class="divRight">
+      <span id="month"> month </span>
+    </span>
+    <span class="divLeft">
+      <input id="slider" type="range" value="1" min="1" max="12" step="1" />
+    </span>
 
-         <span class="polluant">
-            <span id="polluant">polluant </span>
-            </span>
-        <span class="polluant">
-            <select id="polluant">
-                <option value="NO3">NO3</option>
-                <option value="PM25">PM25</option>
-                <option value="O3">O3</option>
-              </select>
-         </span>
 
-         <span class="region">
-            <span id="region">region </span>
-            </span>
-        <span class="region">
-            <select id="region">
-                <option value="Paris">Paris</option>
-                <option value="Lyon">Lyon</option>
-                <option value="Lille">Lille</option>
-              </select>
-         </span>
-        
+    <span class="polluant">
+      <span id="polluant">polluant </span>
+    </span>
+    <span class="polluant">
+      <select id="polluant">
+        <option value="NO3">NO3</option>
+        <option value="PM25">PM25</option>
+        <option value="O3">O3</option>
+      </select>
+    </span>
+
+    <span class="region">
+      <span id="region">region </span>
+    </span>
+    <span class="region">
+      <select id="region">
+        <option value="Paris">Paris</option>
+        <option value="Lyon">Lyon</option>
+        <option value="Lille">Lille</option>
+      </select>
+    </span>
+
     <br />
     <div id="carte">
       <script>
@@ -116,7 +116,7 @@
   <section id="viz2">
     <div>
       <div class="col-lg-8 mx-auto text-center">
-        <h2 class="section-heading">Pourcentage de pollution en France entre l'année 20.. et 20..</h2>
+        <h2 class="section-heading">Pourcentage de pollution en France entre l'année 2017 et 2020</h2>
         <hr class="my-4">
         <p class="text-center">Analyse les differents polluants et leur moyenne par rapport à la régions en cliquant
           dessus </p>
@@ -211,7 +211,7 @@
       </div>
     </div>
   </section>
-  
+
   <footer>
     <section id="contact" style="padding: 8rem 0;">
       <div class="container">
@@ -260,7 +260,7 @@
         </div>
       </div>
     </section>
-  
+
   </footer>
 </body>
 
