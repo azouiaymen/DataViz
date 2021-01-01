@@ -2,42 +2,43 @@
 <html>
 
 <head>
-  <title>Pollution Aeronotique</title>
+  <title>Pollution & Aviation</title>
   <meta charset="UTF-8" />
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <link href="./css/index.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 </head>
 
-<body>
-  <div class="part1">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">pollution & Aviation</a>
-          <br />
-        </div>
 
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#viz1">Taux d'émission</a></li>
-          <li><a href="#">Pollution Atmosphérique</a></li>
+<body>
+  <div class="back">
+    <nav class="navbar">
+        <ul class="nav-navbar-nav">
+          <li class="navbar-brand"><a href="#part1">Accueil</a></li>
+          <li ><a href="#viz1">Taux d'émission</a></li>
+          <li><a href="#viz2">Pollution Atmosphérique</a></li>
           <li><a href="#">Trafic d'aviation</a></li>
+          <li ><a href="#footer">Contact</a></li>
         </ul>
-      </div>
+
     </nav>
     <br /><br /><br /><br />
+  
     <header>
+      
       <h1 class="bienvenue">Bienvenue Sur Notre Visualisation</h1>
       <div class="text">
-        <p class="presentation">
+        <h4 class="presentation">
           Ce site est un outil de visualisation et de comparaison du taux de
           pollution emmis par chaque vol, ainsi que l’évolution du taux de gaz
           emis par les avions (PM25 NO2 NO3) dans certains régions ou
           certaines villes de France.
-        </p>
+        </h4>
       </div>
     </header>
-    <button><a href="#viz1">Commencer la visualisation!</a></button>
+   <button> <a class="btn btn-light btn-xl js-scroll-trigger" href="#viz1">commencer la visualisation!</a></button>
+    <br />
+    <br />
     <br />
     <br />
   </div>
@@ -45,40 +46,52 @@
   <br />
 
   <div id="viz1">
-    <span class="date">
-      <span id="year" class="divRight">year </span>
-      <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
-    </span>
-    <span class="divRight">
-      <span id="month"> month </span>
-    </span>
-    <span class="divLeft">
-      <input id="slider" type="range" value="1" min="1" max="12" step="1" />
-    </span>
+      <span class="date" >
+          <span id="year" class="divRight" >year </span>
+          <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
+         </span>
+          <span class="divRight">
+            <span id="month"> month </span>
+            </span>
+        <span class="divLeft">
+          <input id="slider" type="range"  value="1" min="1" max="12" step="1" />
+         </span>
+     
 
+         <span class="polluant">
+            <span id="polluant">polluant </span>
+            </span>
+        <span class="polluant">
+            <select id="polluant">
+                <option value="NO3">NO3</option>
+                <option value="PM25">PM25</option>
+                <option value="O3">O3</option>
+              </select>
+         </span>
 
-    <span class="polluant">
-      <span id="polluant">polluant </span>
-    </span>
-    <span class="polluant">
-      <select id="polluant">
-        <option value="NO3">NO3</option>
-        <option value="PM25">PM25</option>
-        <option value="O3">O3</option>
-      </select>
-    </span>
-
-    <span class="region">
-      <span id="region">region </span>
-    </span>
-    <span class="region">
-      <select id="region">
-        <option value="Paris">Paris</option>
-        <option value="Lyon">Lyon</option>
-        <option value="Lille">Lille</option>
-      </select>
-    </span>
-
+         <span class="region">
+            <span id="region">region </span>
+            </span>
+        <span class="region">
+            <select id="region">
+                <option value="alpes-cote-dazur">alpes-cote-dazur</option>
+                <option value="Auvergne-Rhone-Alpes">Auvergne-Rhone-Alpes</option>
+                <option value="Bourgogne">Bourgogne</option>
+                <option value="Bretagne">Bretagne</option>
+                <option value="Centre-val-de-loire">Centre-val-de-loire</option>
+                <option value="Corse">Corse</option>
+                <option value="Grand-Est">Grand-Est</option>
+                <option value="Haut-de-france">Haut-de-france</option>
+                <option value="Normandie">Normandie</option>
+                <option value="Nouvelle-aquittaine">Nouvelle-aquittaine</option>
+                <option value="Occitanie">Occitanie</option>
+                <option value="Paca">Paca</option>
+                <option value="Rhone">Rhone</option>
+                <option value="Ile-de-France">Ile-de-France</option>
+              
+              </select>
+         </span>
+        
     <br />
     <div id="carte">
       <script>
@@ -107,16 +120,17 @@
             .attr("fill", "#ccc")
             .attr("d", path);
         });
+
+        
       </script>
     </div>
   </div>
 
   <!-- ********************************************** 2eme visu ********************************************** -->
-
   <section id="viz2">
     <div>
       <div class="col-lg-8 mx-auto text-center">
-        <h2 class="section-heading">Pourcentage de pollution en France entre l'année 2017 et 2020</h2>
+        <h2 class="section-heading">Pourcentage de pollution en France entre l'année 20.. et 20..</h2>
         <hr class="my-4">
         <p class="text-center">Analyse les differents polluants et leur moyenne par rapport à la régions en cliquant
           dessus </p>
@@ -195,7 +209,8 @@
     </div>
   </section>
   <!--****** Tuto pour expliquer le fonctionnement du site ****** -->
-  <section id="services">
+  
+   <section id="services">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -210,9 +225,10 @@
         <h3 class="section-heading"> Tuto pour expliquer le fonctionnement du site </h2>
       </div>
     </div>
-  </section>
-
-  <footer>
+  </section> 
+  
+  <section id="footer">
+  <footer >
     <section id="contact" style="padding: 8rem 0;">
       <div class="container">
         <div class="row">
@@ -260,8 +276,9 @@
         </div>
       </div>
     </section>
-
+  
   </footer>
+  </section>
 </body>
 
 </html>
