@@ -134,6 +134,17 @@ label {
   margin-left: 2%;
 }
 
+#region2 {
+  margin: none;
+  float: left;
+  margin-top: 0%;
+  margin-left: 60%;
+}
+
+.svg2 {
+  margin-left: 20%;
+}
+
 #carte {
   margin: 8%;
 }

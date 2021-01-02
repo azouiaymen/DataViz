@@ -56,8 +56,6 @@
         <span class="divLeft">
           <input id="slider" type="range"  value="1" min="1" max="12" step="1" />
          </span>
-     
-
          <span class="polluant">
             <span id="polluant">polluant </span>
             </span>
@@ -120,8 +118,6 @@
             .attr("fill", "#ccc")
             .attr("d", path);
         });
-
-        
       </script>
     </div>
   </div>
@@ -134,16 +130,33 @@
         <hr class="my-4">
         <p class="text-center">Analyse les differents polluants et leur moyenne par rapport à la régions en cliquant
           dessus </p>
+          <span class="region2">
+              <span id="region2">region </span>
+              </span>
+          <span class="region2">
+              <select id="region2">
+                  <option value="alpes-cote-dazur">alpes-cote-dazur</option>
+                  <option value="Auvergne-Rhone-Alpes">Auvergne-Rhone-Alpes</option>
+                  <option value="Bourgogne">Bourgogne</option>
+                  <option value="Bretagne">Bretagne</option>
+                  <option value="Centre-val-de-loire">Centre-val-de-loire</option>
+                  <option value="Corse">Corse</option>
+                  <option value="Grand-Est">Grand-Est</option>
+                  <option value="Haut-de-france">Haut-de-france</option>
+                  <option value="Normandie">Normandie</option>
+                  <option value="Nouvelle-aquittaine">Nouvelle-aquittaine</option>
+                  <option value="Occitanie">Occitanie</option>
+                  <option value="Paca">Paca</option>
+                  <option value="Rhone">Rhone</option>
+                  <option value="Ile-de-France">Ile-de-France</option>
+                </select>
+           </span>
         <div style="margin-left:600px;">
-          <form>
-            <label><input type="radio" name="all" id="all" value="Choisir"> Région</label>
-          </form>
         </div>
         <div class="col-8">
           <div class="svg2">
           </div>
         </div>
-
         <script>
           console.log("DEBUT SCRIPT DE RYMA : ");
 
@@ -200,25 +213,14 @@
                 .call(d3.axisBottom(xScale));
             svg2.append('g')
                 .call(d3.axisRight(yScale).ticks(10));*/
-
-
-
-
         </script>
       </div>
     </div>
   </section>
   <!--****** Tuto pour expliquer le fonctionnement du site ****** -->
-  
+  <hr>
    <section id="services">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-heading">Conclusion</h2>
-          <hr class="my-4" />
-        </div>
-      </div>
-    </div>
+    
     <div class="container">
       <div class="row" style="margin-left: 110px;">
 
