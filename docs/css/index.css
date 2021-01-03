@@ -190,7 +190,7 @@ li a {
 }
 
 .start-viz{
-  background-image: url("../images/avion2.jpg");
+  background-image: url("../images/zz.jpg");
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -238,13 +238,15 @@ li a {
 
 }
 a {
-  color: #270a04;
+  color: #030303;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
+
+  text-decoration: none;
 }
 a:hover {
-  color: #f05f40;
+  color: #0cec71;
 }
 
 section {
@@ -294,6 +296,17 @@ label {
   float: left;
   margin-right: 0%;
   margin-left: 2%;
+}
+
+#region2 {
+  margin: none;
+  float: left;
+  margin-top: 0%;
+  margin-left: 60%;
+}
+
+.svg2 {
+  margin-left: 20%;
 }
 
 #carte {
