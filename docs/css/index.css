@@ -28,6 +28,18 @@ header{
   
 }
 
+footer{
+  background-color: var(--ThemeColor-dark);
+  background: -moz-linear-gradient(180deg,whitesmoke 15%);
+
+  background: -webkit-linear-gradient(180deg,whitesmoke 15%);
+
+  background: -ms-linear-gradient(180deg,whitesmoke 15%);
+  background: -o-linear-gradient(180deg,whitesmoke 15%);
+  color: white;
+  text-decoration: none;
+}
+
 nav{
   padding:0;
 }
@@ -130,6 +142,10 @@ li {
   height: inherit;
   
 }
+a {
+  text-decoration:none;
+  color:white;
+}
 
 li a {
   margin: 0;
@@ -164,8 +180,8 @@ li a {
 
   background-color: var(--ThemeColor-dark);
  
-  border:0px;
-  border-color: var(--ThemeColor-dark);
+  border:none;
+ 
 
 }
 
@@ -315,10 +331,10 @@ section {
   
   /*background: -moz-linear-gradient(right,whitesmoke 10%,  rgb(78, 78, 76) 50%, rgba(78, 78, 76,0.1) 90%, rgba(245,245,245,0) 100% );
 
-  background: -webkit-linear-gradient(right,whitesmoke 25%  rgb(78, 78, 76) 50% rgba(78, 78, 76,0.1) whitesmoke 100);
+  background: -webkit-linear-gradient(right,whitesmoke 10%,  rgb(78, 78, 76) 50%, rgba(78, 78, 76,0.1) 90%, rgba(245,245,245,0) 100% );
 
-  background: -ms-linear-gradient(right,whitesmoke 25%  rgb(78, 78, 76) 50% rgba(78, 78, 76,0.1) whitesmoke 100%);
-  background: -o-linear-gradient(right,whitesmoke 25%  rgb(78, 78, 76) 50% rgba(78, 78, 76,0.1) whitesmoke 100%);
+  background: -ms-linear-gradient(right,whitesmoke 10%,  rgb(78, 78, 76) 50%, rgba(78, 78, 76,0.1) 90%, rgba(245,245,245,0) 100% );
+  background: -o-linear-gradient(right,whitesmoke 10%,  rgb(78, 78, 76) 50%, rgba(78, 78, 76,0.1) 90%, rgba(245,245,245,0) 100% );
 */
 
 }
@@ -341,7 +357,12 @@ section {
   margin: 0 5% 0 15%
 }
 
+.viz-summary{
 
+  text-align: center;
+  width:100%;
+  margin:auto;
+}
 
 #gauche {
   float: left; /* Le cadre sort du flux */
@@ -400,10 +421,10 @@ label {
 
 #carte {
   position:relative;
-  margin: 8%;
+  margin:1% 1% 5% 5% ;
+  padding:auto;
   float:left;
-  width:50%;
-  height: 100%;
+  display: block;
   border: 1px;
   box-shadow: 0px 0 10px var(--ThemeColor-dark);
 
