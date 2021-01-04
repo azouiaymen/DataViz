@@ -1,5 +1,11 @@
+/*colors theme*/
+:root{
+  --ThemeColor-dark : rgb(78, 78, 76);
+  --ThemeColor-light-green : rgb(55, 199, 79);
+}
 
 
+/*Site css */
 html,body{
   padding: 0%;
   max-width: 100%;
@@ -16,10 +22,14 @@ body {
 }
 header{
 
- 
+ width:100%;
  top:0;
- position:  sticky;
+ position:  relative;
   
+}
+
+nav{
+  padding:0;
 }
 .borders-curved
 {
@@ -81,7 +91,8 @@ header{
   position: sticky;
   bottom:0;
   border-radius: inherit;
-  padding:auto;
+  margin-right: -1
+
   
 }
 .menu
@@ -95,33 +106,21 @@ header{
  
 
 }
-.part1 {
-  position: relative;
-  padding-top: 1%;
-  left:1%;
-  margin-right:-15px;
-  text-align: center;
-
-  font-family: 'Calibri', 'sans serif';
-  width: 100%;
-  height: 100%;
-  background-color: whitesmoke ;
-
-}
 
 ul {
   position: absolute;
+  
   text-align: center;
   list-style-type: none;
-  margin-bottom: 0px;
-  margin-left: -1px;
-  padding:0;
+  
+
+  
   bottom:0;
   overflow: hidden;
-  background-color: rgb(78, 78, 76);
+  background-color: var(--ThemeColor-dark);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
-  display: inline-table;
+
 
 }
 
@@ -148,11 +147,34 @@ li a {
 }
 
  li a:hover{
-  background-color: rgb(61, 56, 56);
+  background-color: var(--ThemeColor-light-green);
   color: white;
   
 }
 
+ .go-up{
+
+  text-align: top;
+  text-decoration: none;
+  color: var(--ThemeColor-light-green);
+  height: 100%;
+  width:10%;
+  margin-left: 25%;
+  float: right; 
+
+  background-color: var(--ThemeColor-dark);
+ 
+  border:0px;
+  border-color: var(--ThemeColor-dark);
+
+}
+
+
+.go-up:hover
+{
+  text-decoration:none;
+
+}
 .navbar-brand {
   text-align: center;
   float :left;
@@ -166,8 +188,13 @@ li a {
   font-size-adjust: inherit;
   font-size: 20px;
   font-family: 'Calibri', sans-serif;
+  
 } 
 
+.content{
+  padding: auto;
+  position: relative;
+}
 .bienvenue {
   text-align: center;
   margin-bottom: 1%;
@@ -190,11 +217,11 @@ li a {
 }
 
 .start-viz{
-  background-image: url("../images/zz.jpg");
+  background-image: url("../images/zz.jpeg");
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  padding: 0px 0px 0px 0px;
+  
 
   clip-path:circle(30% at 0% 45%);
 
@@ -204,6 +231,7 @@ li a {
 .start-viz:hover{
   clip-path: circle(100% at 0% 50%);
 }
+
 .start {
   position: absolute;
   top: 40%;
@@ -211,6 +239,7 @@ li a {
   width: 25%;
   height: 10%;
   padding: auto;
+
   
   border: 0;
  
@@ -220,9 +249,10 @@ li a {
   text-align: center;
   color: #fff;
   text-shadow: 1px 1px 1px rgba(21,21,21,0.8);
-  border-radius: 5px;
-  background-color: rgb(55, 199, 79);
+  border-radius: 2px;
+  background-color: var(--ThemeColor-light-green);
   transition: clip-path, 1s;
+  transition: top, 1s;
 }
 
 
@@ -232,9 +262,8 @@ li a {
   background-color: rgb(102, 231, 124);
   border-width: 2px;
   border-color: rgb(109, 187, 117);
-
-  width: 26%;
-  height: 11%;
+  
+ 
 
 }
 a {
@@ -253,6 +282,66 @@ section {
   margin: 0%;
   display: block;
 }
+
+
+
+.part_div {
+  position: relative;
+  padding-top: 1%;
+  left:1%;
+  margin: 1px 0% 1px 0%;
+ 
+  text-align: center;
+
+  font-family: 'Calibri', 'sans serif';
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke ;
+
+}
+.part_header{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 4em;
+  text-align:center;
+  background-color: var(--ThemeColor-dark);
+
+  
+  color:white;
+  border-width: 1px 0 1px 0;
+
+  border-color: var(--ThemeColor-dark);
+  
+  /*background: -moz-linear-gradient(right,whitesmoke 10%,  rgb(78, 78, 76) 50%, rgba(78, 78, 76,0.1) 90%, rgba(245,245,245,0) 100% );
+
+  background: -webkit-linear-gradient(right,whitesmoke 25%  rgb(78, 78, 76) 50% rgba(78, 78, 76,0.1) whitesmoke 100);
+
+  background: -ms-linear-gradient(right,whitesmoke 25%  rgb(78, 78, 76) 50% rgba(78, 78, 76,0.1) whitesmoke 100%);
+  background: -o-linear-gradient(right,whitesmoke 25%  rgb(78, 78, 76) 50% rgba(78, 78, 76,0.1) whitesmoke 100%);
+*/
+
+}
+.part_title{
+  width: 25%;
+  position:relative;
+  margin: 0 0 0 38.5%;
+  height: 100%;
+  
+  text-align:center;
+
+  clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100% );
+  background-color: var(--ThemeColor-light-green);
+  border-width: 3px;
+  border-style:outset;
+  border-color: var(--ThemeColor-light-green);  
+}
+.part-head-btn{
+  position: relative;
+  margin: 0 5% 0 15%
+}
+
+
 
 #gauche {
   float: left; /* Le cadre sort du flux */
@@ -310,8 +399,14 @@ label {
 }
 
 #carte {
+  position:relative;
   margin: 8%;
+  float:left;
+  width:50%;
+  height: 100%;
+  border: 1px;
+  box-shadow: 0px 0 10px var(--ThemeColor-dark);
+
 }
 
  
-

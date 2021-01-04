@@ -12,7 +12,7 @@
 
 <body>
 
-    <header style="max-width: 100%;">
+    <header class="col" style="max-width: 100%; padding:0">
       <div class="row">
         <div class="nav-head">
           <div class="header-text-area">
@@ -39,8 +39,8 @@
       </div>
     </header>
 
-    <div class="container-fluid bg-light">
-      <div class=" row part1">
+    <div class="container-fluid ">
+      <div class=" row part_div">
         <div class=" col content-intro">
           <div class="presentation">
               <h1 class="bienvenue">Bienvenue Sur Notre Visualisation</h1>
@@ -57,7 +57,7 @@
         </div>
       
         <div class="col start-viz">
-          <input type="button" value="Commencer" class="start text-capitalize"></input>
+          <button class="start " onclick="window.location.href='#'+document.getElementById('viz1').getAttribute('id');" >COMMENCER</input>
         </div>
       
       </div>
@@ -65,7 +65,15 @@
 
     
     
-      <div id="viz1">
+      <div class="row part_div" id="viz1">
+        <div class="part_header">
+
+          <h2 class="part_title">Taux d'&eacute;mission</h2>
+          <button class="go-up"  onclick="window.location.href='#'"><i class="fa fa-angle-up fa-5x go-up-btn" aria-hidden="true"></i></button>
+        </div>
+        <div class="viz_div">
+
+        </div>
         <div class="content settings-viz1">
           <span class="date" >
             <span id="year" class="divRight" >year </span>
@@ -103,13 +111,13 @@
         </div>
           
             
-        <br />
+      
         <div id="carte">
           <script>
             var width = 700,
               height = 580;
             var svg = d3
-              .select("body")
+              .selectAll("div#viz1")
               .append("svg")
               .attr("width", width)
               .attr("height", height);
@@ -138,7 +146,9 @@
     
 
     
-    
+    <div>
+      
+    </div>
     <section id="services">
         <div class="container">
           <div class="row">
@@ -206,5 +216,5 @@
         </section>
       
       </footer>
-      <script type="text/javascript" src="styles.js"></script>
+      <script type="text/javascript" src="js/styles.js"></script>
 </body>
