@@ -85,7 +85,13 @@
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height);
-      
+              
+              console.log('ca arrive')
+              var data = d3.csv("./../data/corse.csv")
+              .then( (d) => { console.log(d) }
+              )
+              console.log('ca arrive 22 ')
+              
               var g = svg.append("g");
       
               var projection = d3
