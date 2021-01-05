@@ -12,149 +12,152 @@
 
 <body>
 
-    <header class="col" style="max-width: 100%; padding:0">
-      <div class="row">
-        <div class="nav-head">
-          <div class="header-text-area">
-            <h1 class=" nav-head-text font-weight-bold text-capitalize">Pollution & Aviation</a>
+  <header class="col" style="max-width: 100%; padding:0">
+    <div class="row">
+      <div class="nav-head">
+        <div class="header-text-area">
+          <h1 class=" nav-head-text font-weight-bold text-capitalize">Pollution & Aviation</a>
+        </div>
+      </div>
+    </div>
+    <div class="row div-menu">
+      <nav class="navbar navbar-inverse col">
+
+        <ul class=" menu borders-curved ">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-home"></i></a>
+          </li>
+
+          <li class="nav-item active"><a class="nav-link" href="#viz1">Taux d'émission</a></li>
+          <li class="nav-item"><a class="nav-link" href="#viz2">Pollution Atmosphérique</a></li>
+          <li class="nav-item"><a class="nav-link" href="#viz3">Trafic d'aviation</a></li>
+        </ul>
+
+
+
+      </nav>
+    </div>
+  </header>
+
+  <div class="container-fluid ">
+    <div class=" row part_div">
+      <div class=" col content-intro">
+        <div class="presentation">
+          <h1 class="bienvenue">Bienvenue Sur Notre Visualisation</h1>
+
+          <div class="text">
+            <p>
+              Ce site est un outil de visualisation et de comparaison du taux de
+              pollution emmis par chaque vol, ainsi que l’évolution du taux de gaz
+              emis par les avions (PM25 NO2 NO3) dans certains régions ou
+              certaines villes de France.
+            </p>
           </div>
         </div>
       </div>
-      <div class="row div-menu">
-        <nav class="navbar navbar-inverse col">     
-             
-            <ul class=" menu borders-curved ">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-home"></i></a> 
-              </li>
-                       
-              <li class="nav-item active"><a class="nav-link" href="#viz1">Taux d'émission</a></li>
-              <li class="nav-item"><a class="nav-link" href="#viz2">Pollution Atmosphérique</a></li>
-              <li class="nav-item"><a class="nav-link" href="#viz3">Trafic d'aviation</a></li>
-            </ul>
-         
-            
-                      
-        </nav>
-      </div>
-    </header>
 
-    <div class="container-fluid ">
-      <div class=" row part_div">
-        <div class=" col content-intro">
-          <div class="presentation">
-              <h1 class="bienvenue">Bienvenue Sur Notre Visualisation</h1>
-              
-              <div class="text">
-                <p >
-                  Ce site est un outil de visualisation et de comparaison du taux de
-                  pollution emmis par chaque vol, ainsi que l’évolution du taux de gaz
-                  emis par les avions (PM25 NO2 NO3) dans certains régions ou
-                  certaines villes de France.
-                </p>
-              </div>
-          </div>
-        </div>
-      
-        <div class="col start-viz">
-          <button class="start " onclick="window.location.href='#'+document.getElementById('viz1').getAttribute('id');" >COMMENCER</input>
-        </div>
-      
+      <div class="col start-viz">
+        <button class="start "
+          onclick="window.location.href='#'+document.getElementById('viz1').getAttribute('id');">COMMENCER</input>
       </div>
 
+    </div>
 
-    
-    
-      <div class="row part_div" id="viz1">
-        <div class="part_header">
 
-          <h2 class="part_title">Taux d'&eacute;mission</h2>
-          <button class="go-up"  onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn" aria-hidden="true"></i></button>
-        </div>
 
-        <div class="viz-summary">
-          <h3 class="col">Presentation visu</h3>
-        </div>
-        <div class="row content">
-          <div class="col viz1" id="carte">
-            <script>
-              var width = 700,
-                height = 580;
-              var svg = d3
-                .selectAll("#carte")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
-      
-              var g = svg.append("g");
-      
-              var projection = d3
-                .geoConicConformal()
-                .center([2.454071, 46.279229])
-                .scale(2800);
-      
-              var path = d3.geoPath().projection(projection);
-      
-              d3.json("data/france.json").then(function (jsondata) {
-                g.selectAll("path")
-                  .data(jsondata.features)
-                  .enter()
-                  .append("path")
-                  .attr("fill", "#ccc")
-                  .attr("d", path);
-              });
-            </script>
-          </div>
 
-          <div class="col settings-viz1">
-            <span class="date" >
-              <span id="year" class="divRight" >year </span>
-              <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
-            </span>
-              <span class="divRight">
-                <span id="month"> month </span>
-                </span>
-            <span class="divLeft">
-              <input id="slider" type="range"  value="1" min="1" max="12" step="1" />
-            </span>
-        
-  
-            <span class="polluant">
-                <span id="polluant">polluant </span>
-                </span>
-            <span class="polluant">
-                <select id="polluant">
-                    <option value="NO3">NO3</option>
-                    <option value="PM25">PM25</option>
-                    <option value="O3">O3</option>
-                  </select>
-            </span>
-  
-            <span class="region">
-                <span id="region">region </span>
-                </span>
-            <span class="region">
-                <select id="region">
-                    <option value="Paris">Paris</option>
-                    <option value="Lyon">Lyon</option>
-                    <option value="Lille">Lille</option>
-                  </select>
-            </span>
-          </div>
-        </div>
+    <div class="row part_div" id="viz1">
+      <div class="part_header">
 
+        <h2 class="part_title">Taux d'&eacute;mission</h2>
+        <button class="go-up" onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn"
+            aria-hidden="true"></i></button>
       </div>
-    
-    
 
-    
+      <div class="viz-summary">
+        <h3 class="col">Presentation visu</h3>
+      </div>
+      <div class="row content">
+        <div class="col viz1" id="carte">
+          <script>
+            var width = 700,
+              height = 580;
+            var svg = d3
+              .selectAll("#carte")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+            var g = svg.append("g");
+
+            var projection = d3
+              .geoConicConformal()
+              .center([2.454071, 46.279229])
+              .scale(2800);
+
+            var path = d3.geoPath().projection(projection);
+
+            d3.json("./france.json").then(function (jsondata) {
+              g.selectAll("path")
+                .data(jsondata.features)
+                .enter()
+                .append("path")
+                .attr("fill", "#ccc")
+                .attr("d", path);
+            });
+          </script>
+        </div>
+
+        <div class="col settings-viz1">
+          <span class="date">
+            <span id="year" class="divRight">year </span>
+            <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
+          </span>
+          <span class="divRight">
+            <span id="month"> month </span>
+          </span>
+          <span class="divLeft">
+            <input id="slider" type="range" value="1" min="1" max="12" step="1" />
+          </span>
+
+
+          <span class="polluant">
+            <span id="polluant">polluant </span>
+          </span>
+          <span class="polluant">
+            <select id="polluant">
+              <option value="NO3">NO3</option>
+              <option value="PM25">PM25</option>
+              <option value="O3">O3</option>
+            </select>
+          </span>
+
+          <span class="region">
+            <span id="region">region </span>
+          </span>
+          <span class="region">
+            <select id="region">
+              <option value="Paris">Paris</option>
+              <option value="Lyon">Lyon</option>
+              <option value="Lille">Lille</option>
+            </select>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
     <div class="row part_div" id="viz2">
       <div class="part_header">
 
         <h2 class="part_title"> Pollution atmospherique</h2>
-        <button class="go-up"  onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn" aria-hidden="true"></i></button>
+        <button class="go-up" onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn"
+            aria-hidden="true"></i></button>
       </div>
-      
+
       <div class="viz-summary">
         <h3 class="col">Presentation visu</h3>
       </div>
@@ -169,11 +172,83 @@
       <div class="part_header">
 
         <h2 class="part_title">Calculateur de consommation</h2>
-        <button class="go-up"  onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn" aria-hidden="true"></i></button>
+        <button class="go-up" onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn"
+            aria-hidden="true"></i></button>
       </div>
-     
+
       <div class="viz-summary">
         <h3 class="col">Presentation visu</h3>
+        <div class="col viz1" id="line_chart">
+          ccccccc
+          <script>
+            var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+              width = 500 - margin.left - margin.right,
+              height = 400 - margin.top - margin.bottom;
+
+            var svg = d3.select("#line_chart")
+              .append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+            var data = d3.csv("./../data/corse.csv")
+              .then(
+                function (d) {
+                  return { date: d3.timeParse("%Y-%m-%d")(d.date), value: d.value }
+                })
+
+              console.log("zazdaz"+data.date)
+
+            data.then(function ([data11, scale]) {
+              console.log("deeed " + data11 + scale)
+            })
+
+
+            data.then(function (data) {
+
+              // Add X axis --> it is a date format
+              var x = d3.scaleTime()
+                .domain(d3.extent(data, function (d) { return d.date; }))
+                .range([0, width]);
+              svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+              console.log('ca arrive jusqua ici222')
+              console.log("azdaazd" + x)
+              // Add Y axis
+              var y = d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) { return +d.value; })])
+                .range([height, 0]);
+              svg.append("g")
+                .call(d3.axisLeft(y));
+
+              // Add the line
+              svg.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.line()
+                  .x(function (d) { return x(d.date) })
+                  .y(function (d) { return y(d.value) })
+                )
+            })
+
+            //console.log('ca arrive jusqua ici')  
+          </script>
+
+
+
+
+
+
+
+        </div>
       </div>
       <div class="row content">
         <div class="col viz2" id="carte">
@@ -182,13 +257,14 @@
     </div>
 
 
-    <div class="row part_div" >
+    <div class="row part_div">
       <div class="part_header">
 
         <h2 class="part_title">Conclusions</h2>
-        <button class="go-up"  onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn" aria-hidden="true"></i></button>
+        <button class="go-up" onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn"
+            aria-hidden="true"></i></button>
       </div>
-     
+
       <div class="viz-summary">
         <section id="services">
           <div class="container">
@@ -201,66 +277,66 @@
           </div>
           <div class="container">
             <div class="row" style="margin-left: 110px;">
-      
+
               <h3 class="section-heading"> Tuto pour expliquer le fonctionnement du site </h2>
             </div>
           </div>
         </section>
       </div>
-     
+
     </div>
 
-    
-    
-      <footer>
-        <section id="contact" style="padding: 1%;">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 mx-auto text-center">
-                <hr class="my-4" />
-                <p class="presentation">
-                  Voulez-vous voir les détails de ce projet? <br />
-                  Avez-vous des questions? <br />
-                  Visitez notre GitHub ou envoyez-nous un e-mail et nous
-                  reviendrons vers vous dès que possible!
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div id="gauche">
-                <i class="fa fa-github fa-3x mb-3"></i>
-                <p>
-                  <a href="https://github.com/ly-ry">Lydia</a>
-                </p>
-                <p>
-                  <a href="https://github.com/rym69">Ryma</a>
-                </p>
-                <p>
-                  <a href="https://github.com/azouiaymen">Aymen</a>
-                </p>
-                <p>
-                  <a href="https://github.com/vizenco">Vincent</a>
-                </p>
-              </div>
-              <div id="droite">
-                <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
-                <p>
-                  <a href="mailto:lydiasaidj20@gmail.com">lydiasaidj20@gmail.com</a>
-                </p>
-                <p>
-                  <a href="mailto:bouiche.rima@gmail.com">bouiche.rima@gmail.com</a>
-                </p>
-                <p>
-                  <a href="mailto:azouiaymen97@gmail.com">azouiaimen97@gmail.com</a>
-                </p>
-                <p>
-                  <a href="mailto:vincent.toinon@outlook.fr">vincent.toinon@outlook.fr</a>
-                </p>
-              </div>
+
+
+    <footer>
+      <section id="contact" style="padding: 1%;">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+              <hr class="my-4" />
+              <p class="presentation">
+                Voulez-vous voir les détails de ce projet? <br />
+                Avez-vous des questions? <br />
+                Visitez notre GitHub ou envoyez-nous un e-mail et nous
+                reviendrons vers vous dès que possible!
+              </p>
             </div>
           </div>
-        </section>
-      
-      </footer>
-      <script type="text/javascript" src="js/styles.js"></script>
+          <div class="row">
+            <div id="gauche">
+              <i class="fa fa-github fa-3x mb-3"></i>
+              <p>
+                <a href="https://github.com/ly-ry">Lydia</a>
+              </p>
+              <p>
+                <a href="https://github.com/rym69">Ryma</a>
+              </p>
+              <p>
+                <a href="https://github.com/azouiaymen">Aymen</a>
+              </p>
+              <p>
+                <a href="https://github.com/vizenco">Vincent</a>
+              </p>
+            </div>
+            <div id="droite">
+              <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+              <p>
+                <a href="mailto:lydiasaidj20@gmail.com">lydiasaidj20@gmail.com</a>
+              </p>
+              <p>
+                <a href="mailto:bouiche.rima@gmail.com">bouiche.rima@gmail.com</a>
+              </p>
+              <p>
+                <a href="mailto:azouiaymen97@gmail.com">azouiaimen97@gmail.com</a>
+              </p>
+              <p>
+                <a href="mailto:vincent.toinon@outlook.fr">vincent.toinon@outlook.fr</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </footer>
+    <script type="text/javascript" src="js/styles.js"></script>
 </body>
