@@ -95,7 +95,7 @@
       
               var path = d3.geoPath().projection(projection);
       
-              d3.json("france.json").then(function (jsondata) {
+              d3.json("./france.json").then(function (jsondata) {
                 g.selectAll("path")
                   .data(jsondata.features)
                   .enter()
