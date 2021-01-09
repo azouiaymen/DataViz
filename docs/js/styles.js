@@ -7,7 +7,8 @@ console.log("hello world");
     .selectAll("#carte")
     .append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("class", "carte1");
 
     var g = svg.append("g");
 
