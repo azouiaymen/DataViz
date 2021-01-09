@@ -1,14 +1,13 @@
-console.log("hello world");
+
 
 
     var width = 700,
     height = 580;
     var svg = d3
-    .selectAll("#carte")
+    .selectAll("#carte1")
     .append("svg")
     .attr("width", width)
-    .attr("height", height)
-    .attr("class", "carte1");
+    .attr("height", height);
 
     var g = svg.append("g");
 
@@ -24,7 +23,7 @@ console.log("hello world");
         
     var path = d3.geoPath().projection(projection);
           
-    var res= d3.json("data/france_regions.json").then(function (jsondata) {
+    var res= d3.json("../../data/france_regions.json").then(function (jsondata) {
     g.selectAll("path")
       .data(jsondata.features)
       .enter()
@@ -38,7 +37,7 @@ console.log("hello world");
       .scaleQuantize()
       .range(["#F5E040","#FF9B2E", "#E66F31", "#FF5A36", "#F52927"]);
 
-      d3.csv("data/resultat_final_bis.csv").then((data) => {
+      d3.csv("../../data/resultat_final_bis.csv").then((data) => {
     
        
         
@@ -65,7 +64,7 @@ console.log("hello world");
         }
   
      
-        d3.json("data/france_regions.json").then((json) => {
+        d3.json("../../data/france_regions.json").then((json) => {
           
           var jour = days_list[0];
           
@@ -82,13 +81,13 @@ console.log("hello world");
               //Recherche de l'etat dans le GeoJSON
               for (var j = 0; j < json.features.length; j++) {
                 var jsonDep = json.features[j].properties.nom.toLowerCase();
-                
+                json.features[j].properties.polluant= trgt_polluant;
                 if (dep == jsonDep) {
                   
                   //On injecte la valeur de l'Etat dans le json
                   json.features[j].properties.value = value;
                  
-                  json.features[j].properties["polluant"]= trgt_polluant;
+                 
                   
                   //Pas besoin de chercher plus loin
                   break;
@@ -108,11 +107,14 @@ console.log("hello world");
           
             updateViz(days_list[new_val], data, json.features, trgt_polluant);
           });
-          d3.select("select#polluant").on("change", (evt) => {
-            
+          d3.selectAll("#polluant").on("change", (evt) => {
+            console.log(evt.target.value.toString().toLowerCase());
             trgt_polluant=evt.target.value.toString().toLowerCase();
             val = d3.select("#oneshot-slider").value;
-            clean_map();
+            json.features.forEach((elt)=>{
+              elt.properties.polluant = trgt_polluant;
+            })
+       
             updateViz(days_list[val], data, json.features, trgt_polluant);
           });
         });
@@ -135,7 +137,7 @@ function init(data){
     .attr("max", list.length - 1);
   d3.select("#oneshot-span").html(list[0]);
   
-  d3.select("select#polluant").selectAll("option")
+  d3.selectAll("#polluant").selectAll("option")
     .data(polluants)
     .enter()
     .append("option")
@@ -145,7 +147,7 @@ function init(data){
 
 function clean_map(){
   g.selectAll("path")
-   .style("fill", "#ccc");
+   .attr("fill", "#ccc");
 } 
 
 function split_years(data){
@@ -201,9 +203,9 @@ function draw(list_value){
               .style("fill", function (d) {
                 //on prend la valeur recuperee plus haut
                 var value = d.properties.value;
-                console.log(`val2 : ${d.properties.value}`);
+               
                 if (value) {
-                  console.log(value);
+                  
                   return colorize(value);
                   
                 } else {
@@ -249,22 +251,22 @@ function updateViz(new_day, datas_emissions, regions, polluant) {
   var reg = "";
   var emissions = 0;
   var regDpt = "";
-  console.log("coucou");
+
   for (var i = 0; i < datas_emissions.length; i++) {
     if (new_day == datas_emissions[i].date) {
       reg = datas_emissions[i].region;
       emissions = parseInt(datas_emissions[i]["getPolluant"](polluant));
 
-      console.log("coucou2");
+      
 
       for (var j = 0; j < regions.length; j++) {
         regCarte = regions[j].properties.nom.toLowerCase();
         
         if (regCarte == reg){
-          console.log("coucou3");
+       
 
             regions[j].properties.value = emissions;
-            console.log("new val: "+ regions[j].properties.value);
+    
             regions[j].properties.hasChanged = true;
             
           break;
