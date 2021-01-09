@@ -40,6 +40,7 @@
   </header>
 
   <div class="container-fluid ">
+    
     <div class=" row part_div">
       <div class=" col content-intro">
         <div class="presentation">
@@ -77,89 +78,68 @@
       <div class="viz-summary">
         <h3 class="col">Presentation visu</h3>
       </div>
-      <div class="row content">
-        <div class="col viz1" id="carte">
-          <script>
-            var width = 700,
-              height = 580;
-            var svg = d3
-              .selectAll("#carte")
-              .append("svg")
-              .attr("width", width)
-              .attr("height", height);
-
-            var g = svg.append("g");
-
-            var projection = d3
-              .geoConicConformal()
-              .center([2.454071, 46.279229])
-              .scale(2800);
-
-            var path = d3.geoPath().projection(projection);
-
-            d3.json("./france.json").then(function (jsondata) {
-              g.selectAll("path")
-                .data(jsondata.features)
-                .enter()
-                .append("path")
-                .attr("fill", "#ccc")
-                .attr("d", path);
-            });
-          </script>
-        </div>
         <div class="row content">
-          <div class="col viz1" id="carte">
-
-          </div>
-
-          <div class="col " id="settings-viz1">
-              
-              <div class="slider-opt-1" id="viz1-opt1">
-                <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
-                <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
-                <span id="oneshot-span"></span>
-              </div>
-              <hr></hr>
+          <div class="col viz1" id="carte1">
            
+            <div class="slider-opt-1" id="viz1-opt1">
+              <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
+              <br/>
+              <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
+              <span id="oneshot-span"></span>
+
+              <span class="polluant">
+                <span>polluant </span>
+                  <select class="selectpicker"id="polluant">
+                     
+                  </select>
+              </span>
+            </div>
+          </div>
+          
+          <div class="col " id="settings-viz1">
+            
+              
+              
+            
               <div class="slider-opt-2" id="viz1-opt2">
                 <label for="viz1-opt2">&eacute;volution sur une ann&eacute;e sp&eacute;cifique</label>
+                <br/>
                   
+                <span id="year" >year </span>
+                <input autocomplete="off" class="slider" id="sliderYear" type="range"  value="1" min="1" max="5" step="1" />
                 
-                  <input autocomplete="off" class="slider" id="sliderYear" type="range"  value="1" min="1" max="5" step="1" />
-                  <span id="year" >year </span>
-               
-                  
-                  <input autocomplete="off" class="slider" id="sliderMonths" type="range"  value="1" min="1" max="12" step="1" />
-                  <span id="month"> month </span>
-              
+                <span>
+                  <span class="polluant">
+                    <span>polluant </span>
+                      <select class="selectpicker" id="polluant">
+                        
+                      </select>
+                  </span>
+                  <span class="region">
+                    <span >region </span>
+                          
+                    <select class="selectpicker" id="region">
+                      <option value="Paris">Paris</option>
+                      <option value="Lyon">Lyon</option>
+                      <option value="Lille">Lille</option>
+                    </select>
+                  </span>
+                </span>
+                                
               </div>
                       
                 
-            <span class="polluant">
-              <span>polluant </span>
-                <select class="selectpicker"id="polluant">
-                   
-                  </select>
-            </span>
-  
+            
+           
         
           </div>
         </div>
 
-          <span class="region">
-            <span id="region">region </span>
-          </span>
-          <span class="region">
-            <select id="region">
-              <option value="Paris">Paris</option>
-              <option value="Lyon">Lyon</option>
-              <option value="Lille">Lille</option>
-            </select>
-          </span>
+   
         </div>
-      </div>
+      
 
-    </div>
+
 
 
 
@@ -176,7 +156,7 @@
         <h3 class="col">Presentation visu</h3>
       </div>
       <div class="row content">
-        <div class="col viz2" id="carte2">
+        <div class="col viz2" id="line_chart">
         </div>
       </div>
     </div>
@@ -192,95 +172,6 @@
 
       <div class="viz-summary">
         <h3 class="col">Presentation visu</h3>
-        <div class="col viz1" id="line_chart">
-            <script>
-              var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-                width = 1000 - margin.left - margin.right,
-                height = 600 - margin.top - margin.bottom;
-
-              var svg = d3.select("#line_chart")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
-
-
-              var parseTime = d3.timeParse("%Y/%m/%d");
-              var data = d3.csv("./../data/corse.csv").then(function (d) {
-                  return d
-                  .filter(function(elem){
-                    return elem[" pm25"] != " ";
-                  })
-                  .map(function(val){
-                    var fefe = {date: parseTime(val.date), value: parseInt(val[" pm25"])};
-                    return fefe;
-                  });
-                }).then(function (deez) {
-                  console.table(deez)
-                  return deez;
-                });
-
-
-              data.then(function (data) {
-                // Add X axis --> it is a date format
-                var x = d3.scaleTime()
-                  .domain(d3.extent(data, d => d.date))
-                  .range([0, width])
-
-                // Add Y axis
-                var y = d3.scaleLinear()
-                  .domain([0, d3.max(data, d => d.value)])
-                  .range([height, 0]);
-
-
-                yAxis = (g) => g
-                  .call(d3.axisLeft(y))
-                  .call(g => g.select(".tick:last-of-type text").clone()
-                    .attr("x", 3)
-                    .attr("text-anchor", "start")
-                    .attr("font-weight", "bold")
-                    .text(data.y));
-
-                xAxis = g => g
-                  .attr("transform", "translate(0," + height + ")")
-                  .call(d3.axisBottom(x));
-
-                line = d3.line()
-                  .defined(d => !isNaN(d.value))
-                  .x(d => x(d.date))
-                  .y(d => y(d.value))
-
-
-                svg.append("g")
-                  .call(xAxis);
-
-                svg.append("g")
-                  .call(yAxis);
-
-                svg.append("path")
-                  .datum(data)
-                  .attr("fill", "none")
-                  .attr("stroke", "steelblue")
-                  .attr("stroke-width", 1.5)
-                  .attr("stroke-linejoin", "round")
-                  .attr("stroke-linecap", "round")
-                  .attr("d", line);
-
-              })
-
-
-              console.log('ca arrive jusqua ici')  
-            </script>
-
-
-
-
-
-
-
-          </div>
       </div>
       <div class="row content">
         <div class="col viz3" id="carte3">
@@ -317,7 +208,7 @@
       </div>
 
     </div>
-
+  </div>
 
 
     <footer>
@@ -366,18 +257,10 @@
               </p>
             </div>
           </div>
-<<<<<<< HEAD
         </section>
       
       </footer>
       
-      <script src="js/styles.js"></script>
+      <script src="js/viz1.js"></script>
+      <script src="js/viz-chart.js"></script>
 </body>
-=======
-        </div>
-      </section>
-
-    </footer>
-    <script type="text/javascript" src="js/styles.js"></script>
-</body>
->>>>>>> main
