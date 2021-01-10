@@ -93,7 +93,7 @@ function buildChart(entryData) {
 function getProperData(poluant, region) {
     const parseTime = d3.timeParse("%Y/%m/%d");
     console.log("azdazd");
-    return d3.csv(/*"./../data/resultat_final.csv"*/"https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
+    return d3.csv("https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
         return d.filter((a) => a["region"] == region)
             .map(function (val) {
                 return { date: parseTime(val.date), value: parseInt(val[` ${poluant}`]) };
@@ -103,7 +103,7 @@ function getProperData(poluant, region) {
 }
 
 function getRegions() {
-    return d3.csv(/*"./../data/resultat_final.csv"*/"https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
+    return d3.csv("https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
         return d;
     }).then(function (deez) {
         return new Set(deez.map(item => item["region"]))
