@@ -1,6 +1,5 @@
 
 $("#polluantContainer").change(function () {
-    console.log("tmnyik");
     getProperData($(this).val(), $("#regionButtContainerSelect").val())
         .then(buildChart);
 });
@@ -12,9 +11,9 @@ $("#regionButtContainerSelect").change(function () {
 
 
 function buildChart(entryData) {
+
     d3.select("#line_chart > *").remove();
 
-    console.log(entryData);
     const chartContainer = d3.select("#line_chart");
     const margin = { top: 10, right: 30, bottom: 30, left: 60 };
 
@@ -77,22 +76,36 @@ function buildChart(entryData) {
     const gy = chart.append("g")
         .call(yAxis);
 
+
+    const deez = y.domain()[1] - y.domain()[0];
+    console.log(deez);
+    const linearGradient = chart.append("linearGradient")
+        .attr("id", "price-gradient")
+        .attr("gradientUnits", "userSpaceOnUse")
+        .attr("x1", 0).attr("y1", y(2 * deez / 10))
+        .attr("x2", 0).attr("y2", y(9 * deez / 10))
+        .selectAll("stop")
+        .data([
+            { offset: "0%", color: "#3BAE83" },
+            { offset: "50%", color: "#FDDE00" },
+            { offset: "100%", color: "#B10000" }
+        ])
+        .enter().append("stop")
+        .attr("offset", function (d) { return d.offset; })
+        .attr("stop-color", function (d) { return d.color; });
+
     const path = chart.append("path")
         .datum(entryData)
         .attr("class", "x-chart")
         .attr("fill", "none")
-        .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
+        .attr("stroke", "url(#price-gradient)")
         .attr("d", line(entryData))
-    console.log(x);
 }
 
 
 function getProperData(poluant, region) {
     const parseTime = d3.timeParse("%Y/%m/%d");
-    console.log("azdazd");
     return d3.csv("https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
         return d.filter((a) => a["region"] == region)
             .map(function (val) {
@@ -117,6 +130,6 @@ function displayRegions(regions) {
 }
 
 var gettingRegions = getRegions().then(displayRegions);
-var data = getProperData("pm25", "alpes-cote-dazur-est");
+var data = getProperData("no2", "grand-est");
 var gettingData = data.then(buildChart)
 
