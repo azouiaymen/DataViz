@@ -92,7 +92,7 @@ function buildChart(entryData) {
 
 function getProperData(poluant, region) {
     const parseTime = d3.timeParse("%Y/%m/%d");
-
+    console.log("azdazd");
     return d3.csv(/*"./../data/resultat_final.csv"*/"https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
         return d.filter((a) => a["region"] == region)
             .map(function (val) {
