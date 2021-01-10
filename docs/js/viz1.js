@@ -1,8 +1,14 @@
 
 
 
-    var width = 700,
+    var width = 800,
     height = 580;
+
+    var trgt_polluant = "";
+    var dictYearDaysData = {};
+    var days_list =[];
+
+
     var svg = d3
     .selectAll("#carte1")
     .append("svg")
@@ -38,30 +44,18 @@
       .range(["#F5E040","#FF9B2E", "#E66F31", "#FF5A36", "#F52927"]);
 
       d3.csv("../../data/resultat_final_bis.csv").then((data) => {
-    
-       
-        
+      
+        colorize.domain([0, 50]);
         data = preprocess(data)   
-        var days_list = init(data);
-        var trgt_polluant = d3.select("#polluant").node().value.toString().toLowerCase();
-        var dictYearDaysData = {};
-        dictYearDaysData = split_years(data);
-        
-        
-
+        init(data);       
+        split_years(data);
+      
         //initialisation des spans et autres elements dynamiques
         init(data)
- 
-        colorize.domain([0, 50]);
-       
+
         //creation de la liste de jours pour les updates
-     
        
-        for (var i = 0; i < data.length; i++) {
-          if (days_list.indexOf(data[i].date) == -1) {
-            days_list.push(data[i].date);
-          }
-        }
+        
   
      
         d3.json("../../data/france_regions.json").then((json) => {
@@ -80,10 +74,12 @@
 
               //Recherche de l'etat dans le GeoJSON
               for (var j = 0; j < json.features.length; j++) {
+                json.features[j].properties.date = jour;
+                jsonDate = json.features[j].properties.date;
                 var jsonDep = json.features[j].properties.nom.toLowerCase();
                 json.features[j].properties.polluant= trgt_polluant;
                 if (dep == jsonDep) {
-                  
+            
                   //On injecte la valeur de l'Etat dans le json
                   json.features[j].properties.value = value;
                  
@@ -109,20 +105,21 @@
           });
           d3.selectAll("#polluant").on("change", (evt) => {
             console.log(evt.target.value.toString().toLowerCase());
-            trgt_polluant=evt.target.value.toString().toLowerCase();
+            trgt_polluant=evt.target.value.toString();
             val = d3.select("#oneshot-slider").value;
             json.features.forEach((elt)=>{
               elt.properties.polluant = trgt_polluant;
+              elt.properties.value = 0;
             })
-       
-            updateViz(days_list[val], data, json.features, trgt_polluant);
+            clean_map();
+            updateViz(days_list[val], data, json.features);
           });
         });
       });
  
 function init(data){
   var list = [];
-  var polluants =['PM25','PM10', 'NO2', 'O3'];
+  var polluants =['PM2.5','PM10', 'NO2', 'O3'];
   for (var i = 0; i < data.length; i++) {
     if (list.indexOf(data[i].date) == -1) {
       list.push(data[i].date);
@@ -142,12 +139,27 @@ function init(data){
     .enter()
     .append("option")
     .text((d) => d);
+
+  d3.json("../../data/france_regions.json").then((jsondata)=>{
+    d3.select("#region").selectAll("option").data(jsondata.features).enter().append("option").text((d) =>{
+      return d.properties.nom;
+    });
+    jsondata.features.forEach(itm => {
+      itm.properties.date = "";
+    
+    })
+
+  });
+  trgt_polluant=d3.select("#polluant").node().value.toString();
+  dictYearDaysData=split_years(data);
+  days_list=list;
   return list;
 }
 
 function clean_map(){
+  console.log("cleaning");
   g.selectAll("path")
-   .attr("fill", "#ccc");
+   .style("fill", "#ccc");
 } 
 
 function split_years(data){
@@ -263,11 +275,16 @@ function updateViz(new_day, datas_emissions, regions, polluant) {
         regCarte = regions[j].properties.nom.toLowerCase();
         
         if (regCarte == reg){
-       
-
-            regions[j].properties.value = emissions;
+          console.log(regions[j].properties.date );  
     
-            regions[j].properties.hasChanged = true;
+          if(regions[j].properties.date == new_day) 
+          {
+            regions[j].properties.value = Math.max(emissions, regions[j].properties.value);
+          } else {
+            regions[j].properties.value = emissions;
+            regions[j].properties.date = new_day;
+          }
+            
             
           break;
           
