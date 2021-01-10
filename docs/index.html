@@ -44,6 +44,7 @@
   </header>
 
   <div class="container-fluid ">
+    
     <div class=" row part_div">
       <div class=" col content-intro">
         <div class="presentation">
@@ -53,7 +54,7 @@
             <p>
               Ce site est un outil de visualisation et de comparaison du taux de
               pollution emmis par chaque vol, ainsi que l’évolution du taux de gaz
-              emis par les avions (PM25 NO2 NO3) dans certains régions ou
+              emis par les avions (PM2.5 NO2 NO3) dans certains régions ou
               certaines villes de France.
             </p>
           </div>
@@ -79,77 +80,71 @@
       </div>
 
       <div class="viz-summary">
-        <h3 class="col">Presentation visu</h3>
+        <h4 class="col">
+          Sur cette visualisation on représente les émissions de différents polluants (PM2.5, PM10, NO2 et O3) sur le territoire français de 2013 à 2020.
+          Il est aussi possible de regarder l'évolution des émissions année par année pour une région donnée.
+        </h4>
       </div>
-      <div class="row content">
-        <div class="col viz1" id="carte">
-          <script>
-            var width = 700,
-              height = 580;
-            var svg = d3
-              .selectAll("#carte")
-              .append("svg")
-              .attr("width", width)
-              .attr("height", height);
+        <div class="row content">
+          <div class="col viz1" id="carte1">
+           
+            <div class="slider-opt-1" id="viz1-opt1">
+              <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
+              <br/>
+              <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
+              <span id="oneshot-span"></span>
 
-            var g = svg.append("g");
-
-            var projection = d3
-              .geoConicConformal()
-              .center([2.454071, 46.279229])
-              .scale(2800);
-
-            var path = d3.geoPath().projection(projection);
-
-            d3.json("./france.json").then(function (jsondata) {
-              g.selectAll("path")
-                .data(jsondata.features)
-                .enter()
-                .append("path")
-                .attr("fill", "#ccc")
-                .attr("d", path);
-            });
-          </script>
+              <span class="polluant">
+                <span>polluant </span>
+                  <select class="selectpicker"id="polluant">
+                     
+                  </select>
+              </span>
+            </div>
+          </div>
+          
+          <div class="col viz1" id="settings-viz1">
+            
+              
+              
+            
+              <div class="slider-opt-2" id="viz1-opt2">
+                <label for="viz1-opt2">&eacute;volution par r&eacute;gion sur une ann&eacute;e sp&eacute;cifique</label>
+                <br/>
+                  
+                <span id="year" >year </span>
+                <input autocomplete="off" class="slider" id="sliderYear" type="range"  value="1" min="1" max="5" step="1" />
+                
+                <span>
+                  <span class="polluant">
+                    <span>polluant </span>
+                      <select class="selectpicker" id="polluant">
+                        
+                      </select>
+                  </span>
+                  <span>
+                  <span class="region">
+                    <span>region </span>
+                    <select class="selectpicker" id="region">
+                    </select>
+                  </span>
+                  </span>
+                </span>
+                                
+              </div>
+                      
+                
+            
+           
+        
+          </div>
         </div>
 
-        <div class="col settings-viz1">
-          <span class="date">
-            <span id="year" class="divRight">year </span>
-            <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
-          </span>
-          <span class="divRight">
-            <span id="month"> month </span>
-          </span>
-          <span class="divLeft">
-            <input id="slider" type="range" value="1" min="1" max="12" step="1" />
-          </span>
-
-
-          <span class="polluant">
-            <span id="polluant">polluant </span>
-          </span>
-          <span class="polluant">
-            <select id="polluant">
-              <option value="NO3">NO3</option>
-              <option value="PM25">PM25</option>
-              <option value="O3">O3</option>
-            </select>
-          </span>
-
-          <span class="region">
-            <span id="region">region </span>
-          </span>
-          <span class="region">
-            <select id="region">
-              <option value="Paris">Paris</option>
-              <option value="Lyon">Lyon</option>
-              <option value="Lille">Lille</option>
-            </select>
-          </span>
+   
         </div>
-      </div>
+      
 
-    </div>
+
 
 
 
@@ -166,7 +161,7 @@
         <h3 class="col">Presentation visu</h3>
       </div>
       <div class="row content">
-        <div class="col viz2" id="carte">
+        <div class="col viz2" id="line_chart">
         </div>
       </div>
     </div>
@@ -193,7 +188,7 @@
         </div>
       </div>
       <div class="row content">
-        <div class="col viz2" id="carte">
+        <div class="col viz3" id="carte3">
         </div>
       </div>
     </div>
@@ -227,7 +222,7 @@
       </div>
 
     </div>
-
+  </div>
 
 
     <footer>
@@ -276,9 +271,10 @@
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-    </footer>
-    <script type="text/javascript" src="js/styles.js"></script>
+        </section>
+      
+      </footer>
+      
+      <script src="js/viz1.js"></script>
+      <script src="js/viz-chart.js"></script>
 </body>
