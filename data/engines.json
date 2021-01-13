@@ -1,0 +1,29 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "model": "BOMBARDIER-CRJ700",
+                "speed_mach": "0.75",
+                "consommation_fuel_kg_s": "1.4214"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "model": "EMBRAER-175",
+                "speed_mach": "0.75",
+                "consommation_fuel_kg_s": "1.744"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "model": "EMBRAER-190",
+                "speed_mach": "0.78",
+                "consommation_fuel_kg_s": "0.8114"
+            }
+        }
+    ]
+}

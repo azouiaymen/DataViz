@@ -1,0 +1,564 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+              
+              
+              
+              "nom": " - "
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                
+              ]
+            }
+          },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Paris"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            2.3291015625,
+            48.86471476180277
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Troyes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.10888671875,
+            48.29781249243716
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Amiens"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            2.28515625,
+            49.89463439573421
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Lille"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.05419921875,
+            50.62507306341435
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Rouen"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            1.07666015625,
+            49.439556958940855
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Caen"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.3955078125,
+            49.18170338770663
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Rennes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.64794921875,
+            48.10743118848039
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Quimper"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -4.06494140625,
+            48.019324184801185
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Nantes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.58203125,
+            47.21956811231547
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Angers"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.5712890625,
+            47.487513008956554
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Tours"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.68115234375,
+            47.4057852900587
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Le Mans"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.24169921874999997,
+            47.989921667414194
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Dijon"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.07568359375,
+            47.35371061951363
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Strasbourg"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            7.75634765625,
+            48.574789910928864
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Metz"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            6.17431640625,
+            49.1242192485914
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Nancy"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            6.1962890625,
+            48.705462895790546
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Lyon"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.822998046875,
+            45.78284835197676
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Annecy"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            6.13037109375,
+            45.92822950933618
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Grenoble"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.745849609375,
+            45.19752230305682
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Monaco"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            7.404785156249999,
+            43.76315996157264
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Marseille"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.38330078125,
+            43.31718491566705
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Montpellier"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.8671874999999996,
+            43.628123412124616
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Perpignan"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            2.92236328125,
+            42.73087427928485
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Bordeaux"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.5767822265625,
+            44.859762688042736
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Toulouse"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            1.42822265625,
+            43.620170616189895
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Limoges"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            1.25244140625,
+            45.85176048817254
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Clermont-Ferrand"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.087158203125,
+            45.79816953017265
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Saint-Etienne"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.39453125,
+            45.4524242413431
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Bourges"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            2.39501953125,
+            47.100044694025215
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Poitiers"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            0.3076171875,
+            46.58906908309182
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "La Rochelle"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.142578125,
+            46.17983040759436
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Reims"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.0374755859375,
+            49.26063518364422
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Ajaccio"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            8.7451171875,
+            41.95131994679697
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          
+          
+          
+          "nom": "Cannes"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            7.0147705078125,
+            43.55651037504758
+          ]
+        }
+      }
+    ]
+  }

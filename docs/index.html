@@ -82,62 +82,28 @@
         </h4>
       </div>
         <div class="row content">
-          <div class="col viz1" id="carte1">
-           
-            <div class="slider-opt-1" id="viz1-opt1">
-              <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
-              <br/>
-              <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
-              <span id="oneshot-span"></span>
+          <div class=" col slider-opt-1" id="viz1-opt1">
+            <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
+            <br/>
+            <span id="oneshot-span"></span>
+            <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
+            
 
-              <span class="polluant">
-                <span>polluant </span>
-                  <select class="selectpicker"id="polluant">
-                     
-                  </select>
-              </span>
-            </div>
+            <span class="polluant">
+              <span>polluant </span>
+                <select class="selectpicker map-polluant"id="polluant">
+                   
+                </select>
+            </span>
           </div>
-          
-          <div class="col viz1" id="settings-viz1">
+          <div class="col viz1" id="carte1">      
             
-              
-              
-            
-              <div class="slider-opt-2" id="viz1-opt2">
-                <label for="viz1-opt2">&eacute;volution par r&eacute;gion sur une ann&eacute;e sp&eacute;cifique</label>
-                <br/>
-                  
-                <span id="year" >year </span>
-                <input autocomplete="off" class="slider" id="sliderYear" type="range"  value="1" min="1" max="5" step="1" />
-                
-                <span>
-                  <span class="polluant">
-                    <span>polluant </span>
-                      <select class="selectpicker" id="polluant">
-                        
-                      </select>
-                  </span>
-                  <span>
-                  <span class="region">
-                    <span>region </span>
-                    <select class="selectpicker" id="region">
-                    </select>
-                  </span>
-                  </span>
-                </span>
-                                
-              </div>
-                      
-                
-            
-           
-        
           </div>
+
         </div>
 
-   
-        </div>
+      </div>
+      
       
 
 
@@ -172,10 +138,53 @@
       </div>
 
       <div class="viz-summary">
-        <h3 class="col">Presentation visu</h3>
+        <h3 class="col">Ici, vous pouvez calculer les émissions de gazs à effets de serre (GES) produites par un vol regional à l'interieur du territoire français en fonction d'une ville de départ, une ville d'arrivée et d'un modèle d'avion "court-courrier".
+
+        </h3>
       </div>
       <div class="row content">
-        <div class="col viz3" id="carte3">
+        <div class="col slider-opt-1" id="viz3-opt">
+          <label for="viz3-opt">selection du trajet</label>
+          <br/>
+          <div class="option-calcu">
+            <span id="span-depart">d&eacute;part</span>
+            <select class="selectpicker villes"id="depart">
+                   
+            </select>
+          </div>
+          
+          <div class="option-calcu">
+            <span>arriv&eacute;e</span>
+            <select class="selectpicker villes"id="arrivee">
+               
+            </select>
+          </div>
+          
+          <div class="option-calcu">
+            <span>modele d'avion</span>
+            <select class="selectpicker avions"id="avion">
+               
+            </select> 
+          </div>
+           
+          
+
+        
+     
+        </div>
+        <div class="col viz1"  id="carteConsommation">
+            
+        </div>
+       
+        <div class="col calcu-res">
+        
+          <p>emission de gazs à effet de serre (GES) en CO2 equivalent (Tonnes).
+              Le résulat obtenu est calculé en multipliant la consommation en fuel de l'appareil par un coefficient 3.16 (CO2) puis par un coefficient 1.22 pour l'équivalence CO2 avec les emissions de GES.
+          </p>
+          <div class="result_conso_div hidden" id="resultat_conso">
+            <h4 id="info-trajet"></h4>
+            <h4 id="conso_amount"></h4>
+          </div>
         </div>
       </div>
     </div>
@@ -262,6 +271,8 @@
       
       </footer>
       
-      <script src="js/viz1.js"></script>
+      <script src="js/viz1-3.js"></script>
       <script src="js/viz-chart.js"></script>
+  
+      
 </body>
