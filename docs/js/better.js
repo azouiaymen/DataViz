@@ -1,18 +1,21 @@
 
-$("#polluantContainer").change(function () {
-    getProperData($(this).val(), $("#regionButtContainerSelect").val())
-        .then(buildChart);
-});
-
 $("#regionButtContainerSelect").change(function () {
-    getProperData($("#polluantContainer").val(), $(this).val())
-        .then(buildChart);
+    d3.selectAll("#line_chart > *").remove();
+    drawAllCharts();
 })
 
+function drawAllCharts() {
+    polluants.forEach(function (d) {
+        getProperData(d, $("#regionButtContainerSelect").val())
+            .then(function (dede) {
+                buildChart(dede, d)
+            })
 
-function buildChart(entryData) {
+    })
+}
 
-    d3.select("#line_chart > *").remove();
+function buildChart(entryData, poop) {
+
 
     const chartContainer = d3.select("#line_chart");
     const margin = { top: 10, right: 30, bottom: 30, left: 60 };
@@ -23,7 +26,7 @@ function buildChart(entryData) {
     const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
 
     const zoom = d3.zoom()
-        .scaleExtent([1, 10])
+        .scaleExtent([1, 5])
         .translateExtent(extent)
         .extent(extent)
         .on('zoom', (event) => {
@@ -57,7 +60,7 @@ function buildChart(entryData) {
             .attr("x", 3)
             .attr("text-anchor", "start")
             .attr("font-weight", "bold")
-            .text(data.y))
+            .text(entryData.y))
 
     const xAxis = g => g
         .attr("class", "x-axis")
@@ -78,7 +81,6 @@ function buildChart(entryData) {
 
 
     const deez = y.domain()[1] - y.domain()[0];
-    console.log(deez);
     const linearGradient = chart.append("linearGradient")
         .attr("id", "price-gradient")
         .attr("gradientUnits", "userSpaceOnUse")
@@ -101,8 +103,16 @@ function buildChart(entryData) {
         .attr("stroke-width", 1.5)
         .attr("stroke", "url(#price-gradient)")
         .attr("d", line(entryData))
-}
 
+    const legend = chart.append("text")
+        .attr("class", "chartLegend")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text(poop);
+}
 
 function getProperData(poluant, region) {
     const parseTime = d3.timeParse("%Y/%m/%d");
@@ -116,6 +126,7 @@ function getProperData(poluant, region) {
 }
 
 function getRegions() {
+    console.log("ca rentre")
     return d3.csv("https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
         return d;
     }).then(function (deez) {
@@ -129,7 +140,8 @@ function displayRegions(regions) {
 
 }
 
-var gettingRegions = getRegions().then(displayRegions);
-var data = getProperData("no2", "grand-est");
-var gettingData = data.then(buildChart)
+var gettingRegions = getRegions().then(displayRegions)
+    .then(drawAllCharts);
+//var data = getProperData("no2", "grand-est");
+//var gettingData = data.then(buildChart)
 
