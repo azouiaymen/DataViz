@@ -40,6 +40,7 @@
   </header>
 
   <div class="container-fluid ">
+    
     <div class=" row part_div">
       <div class=" col content-intro">
         <div class="presentation">
@@ -49,7 +50,7 @@
             <p>
               Ce site est un outil de visualisation et de comparaison du taux de
               pollution emmis par chaque vol, ainsi que l’évolution du taux de gaz
-              emis par les avions (PM25 NO2 NO3) dans certains régions ou
+              emis par les avions (PM2.5 NO2 NO3) dans certains régions ou
               certaines villes de France.
             </p>
           </div>
@@ -75,113 +76,37 @@
       </div>
 
       <div class="viz-summary">
-        <h3 class="col">Presentation visu</h3>
+        <h4 class="col">
+          Sur cette visualisation on représente les émissions de différents polluants (PM2.5, PM10, NO2 et O3) sur le territoire français de 2013 à 2020.
+          Il est aussi possible de regarder l'évolution des émissions année par année pour une région donnée.
+        </h4>
       </div>
-      <div class="row content">
-        <div class="col viz1" id="carte">
-          <script>
-            var width = 700,
-              height = 580;
-            var svg = d3
-              .selectAll("#carte")
-              .append("svg")
-              .attr("width", width)
-              .attr("height", height);
-
-            var g = svg.append("g");
-
-            var projection = d3
-              .geoConicConformal()
-              .center([2.454071, 46.279229])
-              .scale(2800);
-
-            var path = d3.geoPath().projection(projection);
-
-            d3.json("./france.json").then(function (jsondata) {
-              g.selectAll("path")
-                .data(jsondata.features)
-                .enter()
-                .append("path")
-                .attr("fill", "#ccc")
-                .attr("d", path);
-            });
-          </script>
-        </div>
         <div class="row content">
-          <div class="col viz1" id="carte">
-            <script>
-              var width = 700,
-                height = 580;
-              var svg = d3
-                .selectAll("#carte")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
-              
-              console.log('ca arrive')
-              var data = d3.csv("./../data/corse.csv")
-              .then( (d) => { console.log(d) }
-              )
-              console.log('ca arrive 22 ')
-              
-              var g = svg.append("g");
-      
-              var projection = d3
-                .geoConicConformal()
-                .center([2.454071, 46.279229])
-                .scale(2800);
-      
-              var path = d3.geoPath().projection(projection);
-      
-              d3.json("./france.json").then(function (jsondata) {
-                g.selectAll("path")
-                  .data(jsondata.features)
-                  .enter()
-                  .append("path")
-                  .attr("fill", "#ccc")
-                  .attr("d", path);
-              });
-            </script>
+          <div class=" col slider-opt-1" id="viz1-opt1">
+            <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
+            <br/>
+            <span id="oneshot-span"></span>
+            <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
+            
+
+            <span class="polluant">
+              <span>polluant </span>
+                <select class="selectpicker map-polluant"id="polluant">
+                   
+                </select>
+            </span>
+          </div>
+          <div class="col viz1" id="carte1">      
+            
           </div>
 
-        <div class="col settings-viz1">
-          <span class="date">
-            <span id="year" class="divRight">year </span>
-            <input id="sliderYear" type="range" class="divLeft" value="1" min="1" max="5" step="1" />
-          </span>
-          <span class="divRight">
-            <span id="month"> month </span>
-          </span>
-          <span class="divLeft">
-            <input id="slider" type="range" value="1" min="1" max="12" step="1" />
-          </span>
-
-
-          <span class="polluant">
-            <span id="polluant">polluant </span>
-          </span>
-          <span class="polluant">
-            <select id="polluant">
-              <option value="NO3">NO3</option>
-              <option value="PM25">PM25</option>
-              <option value="O3">O3</option>
-            </select>
-          </span>
-
-          <span class="region">
-            <span id="region">region </span>
-          </span>
-          <span class="region">
-            <select id="region">
-              <option value="Paris">Paris</option>
-              <option value="Lyon">Lyon</option>
-              <option value="Lille">Lille</option>
-            </select>
-          </span>
         </div>
-      </div>
 
-    </div>
+      </div>
+      
+      
+
+
 
 
 
@@ -198,7 +123,7 @@
         <h3 class="col">Presentation visu</h3>
       </div>
       <div class="row content">
-        <div class="col viz2" id="carte">
+        <div class="col viz2" id="line_chart">
         </div>
       </div>
     </div>
@@ -213,99 +138,53 @@
       </div>
 
       <div class="viz-summary">
-        <h3 class="col">Presentation visu</h3>
-        <div class="col viz1" id="line_chart">
-            <script>
-              var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-                width = 1000 - margin.left - margin.right,
-                height = 600 - margin.top - margin.bottom;
+        <h3 class="col">Ici, vous pouvez calculer les émissions de gazs à effets de serre (GES) produites par un vol regional à l'interieur du territoire français en fonction d'une ville de départ, une ville d'arrivée et d'un modèle d'avion "court-courrier".
 
-              var svg = d3.select("#line_chart")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
-
-
-              var parseTime = d3.timeParse("%Y/%m/%d");
-              var data = d3.csv("./../data/corse.csv").then(function (d) {
-                  return d
-                  .filter(function(elem){
-                    return elem[" pm25"] != " ";
-                  })
-                  .map(function(val){
-                    var fefe = {date: parseTime(val.date), value: parseInt(val[" pm25"])};
-                    return fefe;
-                  });
-                }).then(function (deez) {
-                  console.table(deez)
-                  return deez;
-                });
-
-
-              data.then(function (data) {
-                // Add X axis --> it is a date format
-                var x = d3.scaleTime()
-                  .domain(d3.extent(data, d => d.date))
-                  .range([0, width])
-
-                // Add Y axis
-                var y = d3.scaleLinear()
-                  .domain([0, d3.max(data, d => d.value)])
-                  .range([height, 0]);
-
-
-                yAxis = (g) => g
-                  .call(d3.axisLeft(y))
-                  .call(g => g.select(".tick:last-of-type text").clone()
-                    .attr("x", 3)
-                    .attr("text-anchor", "start")
-                    .attr("font-weight", "bold")
-                    .text(data.y));
-
-                xAxis = g => g
-                  .attr("transform", "translate(0," + height + ")")
-                  .call(d3.axisBottom(x));
-
-                line = d3.line()
-                  .defined(d => !isNaN(d.value))
-                  .x(d => x(d.date))
-                  .y(d => y(d.value))
-
-
-                svg.append("g")
-                  .call(xAxis);
-
-                svg.append("g")
-                  .call(yAxis);
-
-                svg.append("path")
-                  .datum(data)
-                  .attr("fill", "none")
-                  .attr("stroke", "steelblue")
-                  .attr("stroke-width", 1.5)
-                  .attr("stroke-linejoin", "round")
-                  .attr("stroke-linecap", "round")
-                  .attr("d", line);
-
-              })
-
-
-              console.log('ca arrive jusqua ici')  
-            </script>
-
-
-
-
-
-
-
-          </div>
+        </h3>
       </div>
       <div class="row content">
-        <div class="col viz2" id="carte">
+        <div class="col slider-opt-1" id="viz3-opt">
+          <label for="viz3-opt">selection du trajet</label>
+          <br/>
+          <div class="option-calcu">
+            <span id="span-depart">d&eacute;part</span>
+            <select class="selectpicker villes"id="depart">
+                   
+            </select>
+          </div>
+          
+          <div class="option-calcu">
+            <span>arriv&eacute;e</span>
+            <select class="selectpicker villes"id="arrivee">
+               
+            </select>
+          </div>
+          
+          <div class="option-calcu">
+            <span>modele d'avion</span>
+            <select class="selectpicker avions"id="avion">
+               
+            </select> 
+          </div>
+           
+          
+
+        
+     
+        </div>
+        <div class="col viz1"  id="carteConsommation">
+            
+        </div>
+       
+        <div class="col calcu-res">
+        
+          <p>emission de gazs à effet de serre (GES) en CO2 equivalent (Tonnes).
+              Le résulat obtenu est calculé en multipliant la consommation en fuel de l'appareil par un coefficient 3.16 (CO2) puis par un coefficient 1.22 pour l'équivalence CO2 avec les emissions de GES.
+          </p>
+          <div class="result_conso_div hidden" id="resultat_conso">
+            <h4 id="info-trajet"></h4>
+            <h4 id="conso_amount"></h4>
+          </div>
         </div>
       </div>
     </div>
@@ -339,7 +218,7 @@
       </div>
 
     </div>
-
+  </div>
 
 
     <footer>
@@ -388,9 +267,12 @@
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-    </footer>
-    <script type="text/javascript" src="js/styles.js"></script>
+        </section>
+      
+      </footer>
+      
+      <script src="js/viz1-3.js"></script>
+      <script src="js/viz-chart.js"></script>
+  
+      
 </body>
