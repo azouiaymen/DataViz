@@ -452,6 +452,7 @@ function initPoints() {
   pins.append("circle").attr("id", "depart-point").attr("class", "point ihdden").attr("cx", "0px").attr("cy", "0px");
   pins.append("circle").attr("id", "arrivee-point").attr("class", "point hidden").attr("cx", "0px").attr("cy", "0px");
   d3.select(".result_conso_div").append("svg").attr("class", "result_conso_svg").attr("width",w+"vw").attr("height", h+"vw");
+  d3.select(".result_conso_div").append("p").attr("id","precisions");
 
 }
 function hide(id_point) {
@@ -573,6 +574,7 @@ function renderResults(res, trajet){
   d3.select("#conso_amount").html("emmisions (GES): "+res)
   
   d3.select(".result_conso_svg").style("background-color",function(){return colorize2(res);} )
+   d3.select("#precisions").html("Soit l'équivalent des emmissions annuelles moyennes de "+Math.floor(res)+" Français pour le chauffage du domicile.")
   d3.select("#resultat_conso").classed("hidden", false);  
 
 }
