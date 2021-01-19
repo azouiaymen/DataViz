@@ -1,59 +1,108 @@
-var width = 800,
-  height = 520;
+var width = 700,
+  height = 700;
+var jaugeW = 300,
+  jaugeH = 30;
 
-var trgt_polluant = "";
 var days_list = [];
 
+var polluants = ['PM25', 'PM10', 'NO2', 'O3'];
 
-var svg = d3
-  .select("#carte1")
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height);
+var svg = d3.select("#carte1")
+var svg_jauge1 = d3.select("div#legende")
+                   .append("svg")
+                   .attr("width", jaugeW)
+                   .attr("height", jaugeH)
+                   .attr("id","jauge")
+
 
 
 var svg2 = d3
   .select("#carteConsommation")
   .append("svg")
-  .attr("width", width)
-  .attr("height", height)
+  .attr("width", 800)
+  .attr("height", 500)
   .attr("id", "map_conso");
 
-var g = svg.append("g");
 
+
+
+//var g = svg.append("g");
 var g2 = svg2.append("g")
-
-var tooltip = d3
+tooltips={};
+polluants.forEach((i)=>{
+  var tool= d3
   .select("body")
   .append("div")
-  .attr("class", "hidden tooltip-viz1");
+  .attr("class", "hidden tooltip-viz1")
+  .attr("id","tooltip"+i);
+  tooltips[i] = tool
+})
 
 
 
+//PROJECTION / COLORIZE
+//
+//
 
 var projection = d3.geoConicConformal()
-  .center([2.454071, 46.279229])
+  .center([15.471, 43.27229])
+  .scale(1800),
+  projection_viz3 = d3.geoConicConformal()
+  .center([3.454071, 46.279229])
   .scale(2800);
 
-var path = d3.geoPath().projection(projection);
+var path = d3.geoPath().projection(projection),
+  path_viz3 = d3.geoPath().projection(projection_viz3);
 
 var colorize = d3
   .scaleQuantize()
-  .range(["#F5E040", "#FF9B2E", "#E66F31", "#FF5A36", "#F52927"]);
+  .range(["#F5E040", "#FF9B2E", "#FF5A36", "#F52927"]);
 
-var colorize2 = d3 
+var colorize2 = d3
   .scaleQuantize()
-  .range(["#F5E040", "#FF9B2E", "#E66F31", "#FF5A36", "#F52927"]);
+  .range(["#F5E040", "#FF9B2E", "#FF5A36", "#F52927"]);
 
-var res = d3.json("../../data/france_regions.json").then(function (jsondata) {
-  g.selectAll("path")
-    .data(jsondata.features)
-    .enter()
-    .append("path")
-    .attr("fill", "#ccc")
-    .attr("id", "map_fr_path")
-    .attr("stroke-width", "stroke")
-    .attr("d", path);
+
+var cpt = 0;
+
+
+
+polluants.forEach((i) => {
+  var div = svg.append("div").attr("id", "div" + i);
+  div.append("label")
+    .attr("id", "label-viz1")
+    .attr("for", "div" + i)
+    .html(i)
+  div.append("svg")
+    .attr("width", width / 2)
+    .attr("height", height / 2)
+    .attr("id", "map" + i)
+
+})
+polluants.forEach((i) => {
+
+  d3.select("#map" + i.toString())
+    .append("g")
+    .attr("id", "g" + i.toString())
+})
+
+//DESSIN DES CARTES
+//
+// 
+var res = d3.json("/docs/data/france_regions.json").then(function (jsondata) {
+
+
+  polluants.forEach((i) => {
+    d3.select("#g" + i)
+      .selectAll("path")
+      .data(jsondata.features)
+      .enter()
+      .append("path")
+      .attr("fill", "#ccc")
+      .attr("id", "map_fr_path" + i )
+      .attr("stroke-width", "stroke")
+      .attr("d", path);
+  })
 
   g2.selectAll("path")
     .data(jsondata.features)
@@ -62,15 +111,18 @@ var res = d3.json("../../data/france_regions.json").then(function (jsondata) {
     .attr("fill", "#ccc")
     .attr("id", "map_fr_conso")
     .attr("stroke-width", "stroke")
-    .attr("d", path);
+    .attr("d", path_viz3);
 
 });
 
+//RECUPERATION DES DONNEES
+// ET INITIALISATION
+//
+d3.csv("/docs/data/resultat_final_bis.csv").then((data) => {
 
-d3.csv("../../data/resultat_final_bis.csv").then((data) => {
+  colorize.domain([0, 60]);
 
-  colorize.domain([0, 50]);
-
+  
 
   data = preprocess(data)
   init(data);
@@ -84,63 +136,75 @@ d3.csv("../../data/resultat_final_bis.csv").then((data) => {
 
 
 
-  d3.json("../../data/france_regions.json").then((json) => {
-
+  d3.json("/docs/data/france_regions.json").then((json) => {
     var jour = days_list[0];
 
 
 
-    for (var i = 0; i < data.length; i++) {
-      //Nom du departement
-      if (data[i].date == jour) {
-        var dep = data[i].region;
+    
+
+      
+      for (var i = 0; i < data.length; i++) {
+        //Nom du departement
+        if (data[i].date == jour) {
+
+          polluants.forEach((itm) => {
+          var dep = data[i].region;
 
 
-        var value = parseInt(data[i]["getPolluant"](trgt_polluant));
+          var value = parseInt(data[i]["getPolluant"](itm));
+          
+          var repeat = false;
+          //Recherche de l'etat dans le GeoJSON
+          for (var j = 0; j < json.features.length; j++) {
+            json.features[j].properties.date = jour;
+            jsonDate = json.features[j].properties.date;
+            var jsonDep = json.features[j].properties.nom.toLowerCase();
 
-        //Recherche de l'etat dans le GeoJSON
-        for (var j = 0; j < json.features.length; j++) {
-          json.features[j].properties.date = jour;
-          jsonDate = json.features[j].properties.date;
-          var jsonDep = json.features[j].properties.nom.toLowerCase();
-          json.features[j].properties.polluant = trgt_polluant;
-          if (dep == jsonDep) {
+            if (dep == jsonDep) {
+              
+              //On injecte la valeur de l'Etat dans le json
+              
+              if (isNaN(value)) {
+                json.features[j].properties.value = 0;
+              }
+              if (repeat) {
+                json.features[j].properties.value = Math.max(value, json.features[j].properties.value);
+                
+              } else {
+                json.features[j].properties.value = value;
+                repeat = true;
+              }
+    
 
-            //On injecte la valeur de l'Etat dans le json
-            json.features[j].properties.value = value;
+              
 
-
-
-            //Pas besoin de chercher plus loin
-            break;
+              //Pas besoin de chercher plus loin
+              break;
+            }
           }
+          
+          draw(json.features, itm)
+        })
         }
       }
-    }
+      
+    
+     
 
-
-    draw(json.features)
+    
 
 
 
     d3.select("#oneshot-slider").on("input", (event) => {
       new_val = event.target.value;
       d3.select("#oneshot-span").html(days_list[new_val]);
-
-      updateMap(days_list[new_val], data, json.features, trgt_polluant);
-    });
-    d3.selectAll("#polluant").on("change", (evt) => {
-
-      trgt_polluant = evt.target.value.toString();
-      val = d3.select("#oneshot-slider").html().toString();
-
-      json.features.forEach((elt) => {
-        elt.properties.polluant = trgt_polluant;
-        elt.properties.value = 0;
+      polluants.forEach((i) => {
+        updateMap(days_list[new_val], data, json.features, i);
       })
-      clean_map();
-      updateMap(days_list[val], data, json.features, trgt_polluant);
+
     });
+
   });
 
 
@@ -161,7 +225,6 @@ var tooltip_conso = d3
   .select("body")
   .append("div")
   .attr("class", "hidden tooltip-viz1");
-
 var pins = svg2.append("g");
 
 initPoints();
@@ -172,7 +235,7 @@ var projectionConso = d3.geoMercator()
 
 var pathConso = d3.geoPath().projection(projectionConso)
 
-var villes = d3.json("../data/villes_fr.json").then((json) => {
+var villes = d3.json("/docs/data/villes_fr.json").then((json) => {
   var ret = []
   json.features.forEach((itm) => {
 
@@ -184,13 +247,13 @@ var villes = d3.json("../data/villes_fr.json").then((json) => {
 
 
 });
-var planes = d3.json("../data/engines.json").then((data) => {
+var planes = d3.json("/docs/data/engines.json").then((data) => {
   return data;
 });
 
 
 planes.then((dataplanes) => {
-  console.log(dataplanes)
+
   d3.select(".avions")
     .selectAll("option")
     .data(dataplanes.features)
@@ -199,17 +262,18 @@ planes.then((dataplanes) => {
     .attr("value", (d) => (d.properties.model))
     .text((d) => (d.properties.model));
   d3.select(".avions").on('change', (event) => {
-      var selected_model = getAvion(event.target.value, dataplanes);
-      console.log("readyyy")  
-      if(readyToGo()){
-        console.log("readyyy")
-        calculEmissions(coords, selected_model);  
-      }
-      
-    });
-    selected_model = getAvion(d3.select("#avion").property("value").toString(), dataplanes)
-   
-    console.log("model ",selected_model)
+    var selected_model = getAvion(event.target.value, dataplanes);
+
+    resetIcons();
+    if (readyToGo()) {
+
+      calculEmissions(coords, selected_model);
+    }
+
+  });
+  selected_model = getAvion(d3.select("#avion").property("value").toString(), dataplanes)
+
+
 });
 
 villes.then((data) => {
@@ -229,11 +293,12 @@ villes.then((data) => {
       coords.dep.point = getCoords(event.target.value, villes_fr);
       coords.dep.name = value;
       var id = event.target.id + "-point"
-
+      resetIcons();
       if (value != begin) {
         bool_dep = true;
         drawPoint(coords.dep, id);
         if (readyToGo()) {
+
           coords.dist = distance_trajet(coords);
           drawTrajet(coords, data);
           calculEmissions(coords, selected_model);
@@ -251,6 +316,7 @@ villes.then((data) => {
     .on('change', (event) => {
       var value = event.target.value;
       var id = event.target.id + "-point"
+      resetIcons();
       if (value != begin) {
         bool_arr = true;
         coords.arr.point = getCoords(event.target.value, villes_fr);
@@ -258,9 +324,10 @@ villes.then((data) => {
 
         drawPoint(coords.arr, id);
         if (readyToGo()) {
+
           coords.dist = distance_trajet(coords);
           drawTrajet(coords, data);
-          console.log("trip ",coords);
+
           calculEmissions(coords, selected_model);
 
         }
@@ -279,13 +346,14 @@ villes.then((data) => {
 
 
 /**FONCTIONS VISU 1 */
+
 function preprocess(data_csv) {
   for (var i = 0; i < data_csv.length; i++) {
     for (k in data_csv[i]) {
       data_csv[i][k] = data_csv[i][k].toString().trim();
       data_csv[i]["getPolluant"] = function (name) {
 
-        return this[name] ? this[name] : undefined;
+        return (this[name] && !isNaN(this[name]) ? this[name] : 0);
 
       }
 
@@ -298,6 +366,7 @@ function preprocess(data_csv) {
 
       }
     }
+
     data_csv[i].date = tab[2] + "/" + tab[1] + "/" + tab[0]
 
   }
@@ -306,7 +375,7 @@ function preprocess(data_csv) {
 
 function init(data) {
   var list = [];
-  var polluants = ['PM2.5', 'PM10', 'NO2', 'O3'];
+
   for (var i = 0; i < data.length; i++) {
     if (list.indexOf(data[i].date) == -1) {
       list.push(data[i].date);
@@ -320,28 +389,80 @@ function init(data) {
     .attr("value", 0)
     .attr("max", list.length - 1);
   d3.select("#oneshot-span").html(list[0]);
+  var cpt = 0;
+ /* svg_jauge1.selectAll("rect")
+  .data(colorize.range())
+  .enter()
+  .append("rect")
+  .attr("id", "rect" + cpt)
+  .attr("x", (d) => {
+    var ret = cpt * (300 / d.length) + "px";
+    cpt = cpt + 1;
+    return ret;
+  })
+  .attr("y", 0)
+  .attr("width",(d)=>{return jaugeW / d.length} )
+  .attr("height", jaugeH)
+  .style("fill", (d) => (d));
+*/
+  bars = svg_jauge1.selectAll("g")
+            .data(colorize.range())
+            .enter()
+            .append("g")
+  bars.append("rect")
+      .attr("x",() => {
+        var ret = cpt * (jaugeW / colorize.range().length) + "px";
+        cpt = cpt + 1;
+        return ret;
+      }) 
+      .attr("y", 0)
+      .attr("width",jaugeW / colorize.range().length)
+      .attr("height", jaugeH)
+      .style("fill", (d) => (d));
+  
+  var cpt_txt=0;
 
-  d3.selectAll("#polluant").selectAll("option")
-    .data(polluants)
+  bars.append("text")
+      .attr("x", (d,i)=>{
+        var ret = i * (jaugeW / colorize.range().length) +10+ "px";
+
+        return ret;
+      })
+      .attr("y",(d)=>(jaugeH-(jaugeH/d.length)))
+      .text((d,i)=>{
+        
+        var str = (Math.ceil(i*(60/colorize.range().length))).toString() +"-"+(i+1)*Math.ceil((60/colorize.range().length)).toString()
+  
+        return str;
+      })
+
+  //bars.append
+  
+    /*.selectAll("rect")
+    .data(colorize.range())
     .enter()
-    .append("option")
-    .text((d) => d);
-
-
-  trgt_polluant = d3.select("#polluant").node().value.toString();
+    .append("rect")
+    .attr("x", )
+    .style("fill", (d) => (d))
+    .style("color", "white")
+    .text((d) => {
+      var s = "";
+      if (cpt == 0) {
+        s = colorize.domain()[0].toString() + "-"
+      } else if (cpt == colorize.range().length - 1) {
+        s = colorize.domain()[1].toString() + "+"
+      }
+      cpt++;
+      return s;
+    })*/
+  for(var i =0; i< colorize.range().length; i++)
+  {
+    svg_jauge1.select("#rect"+i).selectAll("text").data(colorize.range())
+  }
+ 
 
   days_list = list;
 
-}
-
-
-
-
-
-function clean_map() {
-
-  g.selectAll("path")
-    .style("fill", "#ccc");
 }
 
 
@@ -354,17 +475,22 @@ function sortedList(list) {
   });
 }
 
-function draw(list_value) {
+function draw(list_value, i) {
 
-  g.selectAll("#map_fr_path").data(list_value).join(
-    //premier dessin --> enter
-    enter => enter.append("path")
+  
+
+
+  d3.select("#g" + i)
+    .selectAll("#map_fr_path" + i).data(list_value).join(
+      //premier dessin --> enter
+      enter => enter.append("path")
+      .attr("id", "map_fr_path" + i)
       .attr("d", path)
       .style("fill", function (d) {
         //on prend la valeur recuperee plus haut
         var value = d.properties.value;
 
-        if (value) {
+        if (value && !isNaN(value)) {
 
           return colorize(value);
 
@@ -373,19 +499,20 @@ function draw(list_value) {
           return "#ccc";
         }
       }),
-    //second dessin --> update
-    update => update.style("fill", (d) => {
+      //second dessin --> update
+      update => update.style("fill", (d) => {
 
-      if (d.properties.value) {
-        return colorize(d.properties.value);
-      } else {
-        return "#ccc"
-      }
-    }))
+        if (d.properties.value && !isNaN(d.properties.value)) {
+          return colorize(d.properties.value);
+        } else {
+          return "#ccc"
+        }
+      }))
     .on("mouseover", function (event, d) {
       //on capture la position de la souris
+      
       var pos = [event.pageX, event.pageY];
-      tooltip
+      d3.select("#tooltip"+i)
         .classed("hidden", false)
         .attr(
           "style",
@@ -396,25 +523,26 @@ function draw(list_value) {
           (pos[1] - 10) +
           "px;"
         )
-        .html(d.properties.nom + " <br/> emissions " + d.properties.polluant + ": " + d.properties.value);
+        .html(d.properties.nom + " <br/> emissions " + i + ": " + d.properties.value);
+
     })
     .on("mouseout", (event, d) => {
-      tooltip.classed("hidden", true);
+      d3.select("#tooltip"+i).classed("hidden", true);
 
     });
+
 }
 
 
 
-function updateMap(new_day, datas_emissions, regions, polluant) {
+function updateMap(new_day, datas_emissions, regions, pollu) {
   var reg = "";
   var emissions = 0;
-  var regDpt = "";
-
+ 
   for (var i = 0; i < datas_emissions.length; i++) {
     if (new_day == datas_emissions[i].date) {
       reg = datas_emissions[i].region;
-      emissions = parseInt(datas_emissions[i]["getPolluant"](polluant));
+      emissions = parseInt(datas_emissions[i]["getPolluant"](pollu));
 
 
 
@@ -423,7 +551,9 @@ function updateMap(new_day, datas_emissions, regions, polluant) {
 
         if (regCarte == reg) {
 
-
+          if (isNaN(regions[j].properties.value)) {
+            regions[j].properties.value = 0;
+          }
           if (regions[j].properties.date == new_day) {
             regions[j].properties.value = Math.max(emissions, regions[j].properties.value);
           } else {
@@ -440,7 +570,7 @@ function updateMap(new_day, datas_emissions, regions, polluant) {
   }
 
 
-  draw(regions)
+  draw(regions, pollu)
 }
 
 /**FONCTIONS VISU 3 */
@@ -449,16 +579,20 @@ function initPoints() {
   var w = 15;
   var h = 3;
 
-  pins.append("circle").attr("id", "depart-point").attr("class", "point ihdden").attr("cx", "0px").attr("cy", "0px");
+  pins.append("circle").attr("id", "depart-point").attr("class", "point hidden").attr("cx", "0px").attr("cy", "0px");
   pins.append("circle").attr("id", "arrivee-point").attr("class", "point hidden").attr("cx", "0px").attr("cy", "0px");
-  d3.select(".result_conso_div").append("svg").attr("class", "result_conso_svg").attr("width",w+"vw").attr("height", h+"vw");
-  d3.select(".result_conso_div").append("p").attr("id","precisions");
 
 }
+
 function hide(id_point) {
   pins.select("#" + id_point).classed("hidden", true).attr("cx", "-10000px").attr("cy", "-10000px");
-  d3.select(".result_conso_div").classed("hidden", true);
+  d3.select(".result_conso_div ").classed("hidden", true);
 }
+
+function resetIcons() {
+  d3.select("#equiv-icons").selectAll("i").remove();
+}
+
 function drawPoint(point, id) {
 
 
@@ -466,8 +600,8 @@ function drawPoint(point, id) {
 
   pins.selectAll("#" + id)
     .attr("r", "5px")
-    .attr("cx", projection(point.point)[0])
-    .attr("cy", projection(point.point)[1])
+    .attr("cx", projection_viz3(point.point)[0])
+    .attr("cy", projection_viz3(point.point)[1])
     .classed("hidden", false)
     .attr("fill", "green")
     .on('mouseover', (event) => {
@@ -491,31 +625,35 @@ function drawPoint(point, id) {
     });
 }
 
-function distance_trajet(coords){
+function distance_trajet(coords) {
 
-  formula = 6378 * Math.acos(Math.sin(toRadian(coords.dep.point[1]))*Math.sin(toRadian(coords.arr.point[1]))
-                      + Math.cos(toRadian(coords.dep.point[1]))*Math.cos(toRadian(coords.arr.point[1]))
-                      *Math.cos(toRadian(coords.arr.point[0]) - toRadian(coords.dep.point[0])));
- 
+  formula = (6378 * Math.acos(Math.sin(toRadian(coords.dep.point[1])) * Math.sin(toRadian(coords.arr.point[1])) +
+    Math.cos(toRadian(coords.dep.point[1])) * Math.cos(toRadian(coords.arr.point[1])) *
+    Math.cos(toRadian(coords.arr.point[0]) - toRadian(coords.dep.point[0])))).toFixed(2);
+
   return formula;
 }
 
-function toRadian(val_deg){
-  return (val_deg*Math.PI)/180;
+function toRadian(val_deg) {
+  return (val_deg * Math.PI) / 180;
 }
 
 
-function calculEmissions(trajet, avion){
-  console.log("avion ", avion.speed)
-  console.log("trajt ", trajet)
-  var mach_kmh = parseFloat(avion.properties.speed_mach)*1234.8;
-  console.log(mach_kmh)
+function calculEmissions(trajet, avion) {
 
-  var time = (trajet.dist/ mach_kmh)*3600;
-  var em_GES_co2eq=(time * avion.properties.consommation_fuel_kg_s * 3.16 * 1.22)/1000;
-  console.log("emission GES ", em_GES_co2eq," kg en ", time/60," minutes");
 
-  renderResults(em_GES_co2eq, trajet)
+  var em_GES_co2eq = 0;
+  if (trajet.dist > 0) {
+    var mach_kmh = parseFloat(avion.properties.speed_mach) * 1234.8;
+
+
+    var time = (trajet.dist / mach_kmh) * 3600;
+    em_GES_co2eq = ((((time * avion.properties.consommation_fuel_flying) + avion.properties.LTO_conso) * 3.16 * 1.22) / 1000).toFixed(2);
+  }
+
+
+
+  renderResults(em_GES_co2eq, trajet);
 }
 
 
@@ -523,17 +661,18 @@ function getAvion(modele, list)
 
 {
 
-  var ret ={}
-  for(var i = 0; i < list.features.length; i++){
-    
-    if(list.features[i].properties.model == modele){
+  var ret = {}
+  for (var i = 0; i < list.features.length; i++) {
+
+    if (list.features[i].properties.model == modele) {
       ret = list.features[i];
-      
+
     }
   }
-  console.log(ret)
+
   return ret;
 }
+
 function readyToGo() {
   return (bool_dep && bool_arr);
 }
@@ -543,15 +682,16 @@ function drawTrajet(coords, villes) {
   pins.append("line")
     .style("stroke", "green")
     .style("stroke-width", 3)
-    .attr("x1", projection(coords.dep.point)[0])
-    .attr("y1", projection(coords.dep.point)[1])
-    .attr("x2", projection(coords.arr.point)[0])
-    .attr("y2", projection(coords.arr.point)[1]);
+    .attr("x1", projection_viz3(coords.dep.point)[0])
+    .attr("y1", projection_viz3(coords.dep.point)[1])
+    .attr("x2", projection_viz3(coords.arr.point)[0])
+    .attr("y2", projection_viz3(coords.arr.point)[1]);
 }
 
 function del_trajet() {
   pins.selectAll("line").remove();
 }
+
 function getCoords(lieu, villes) {
   var res_arr = [];
 
@@ -566,15 +706,36 @@ function getCoords(lieu, villes) {
   return res_arr;
 }
 
-function renderResults(res, trajet){
-  colorize2.domain([0, 10]);
+function renderResults(res, trajet) {
+  colorize2.domain([0, 2]);
   var dep = d3.select("#depart").node().value;
   var arr = d3.select("#arrivee").node().value;
-  d3.select("#info-trajet").html("Trajet "+dep +" - "+arr+" : "+trajet.dist+"km")
-  d3.select("#conso_amount").html("emmisions (GES): "+res)
-  
-  d3.select(".result_conso_svg").style("background-color",function(){return colorize2(res);} )
-   d3.select("#precisions").html("Soit l'équivalent des emmissions annuelles moyennes de "+Math.floor(res)+" Français pour le chauffage du domicile.")
-  d3.select("#resultat_conso").classed("hidden", false);  
+  d3.select("#info-trajet").html("Trajet " + dep + " - " + arr + " : " + trajet.dist + "km")
+  d3.select("#conso_amount").html("emmisions (GES): " + res + " T (CO2eq)")
+  var borne_sup = Math.ceil(res)
+
+  for (var i = 0; i < borne_sup; i++) {
+    var id_icon = "icon" + i;
+    var sup_1 = res > 1
+    d3.select("#equiv-icons").append("i")
+      .attr("id", id_icon)
+      .attr("class", "fa fa-home")
+      .style("font-size", "4vw")
+      .style("color", "white");
+
+  }
+  var jauge_dims = Array(d3.select("#equiv-icons").style("width"), d3.select("#equiv-icons").style("width"))
+
+  d3.select("#equiv-icons")
+    .style("background", "linear-gradient(to right," + colorize2(res) + " " + 100 * ((res) / borne_sup) + "%, white " + 100 * ((res) / borne_sup) + "%)")
+  d3.select("#equiv-icons").append("line")
+    .attr("x1", jauge_dims[1] * (res / borne_sup))
+    .attr("y1", jauge_dims[0])
+    .attr("x2", jauge_dims[1] * (res / borne_sup))
+    .attr("y1", jauge_dims[0] - 15)
+    .attr("stroke", "black")
+    .attr("stroke-width", 1);
+
+  d3.select(".result_conso_div ").classed("hidden", false);
 
 }

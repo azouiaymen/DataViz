@@ -40,7 +40,7 @@
   </header>
 
   <div class="container-fluid ">
-    
+
     <div class=" row part_div">
       <div class=" col content-intro">
         <div class="presentation">
@@ -77,34 +77,44 @@
 
       <div class="viz-summary">
         <h4 class="col">
-          Sur cette visualisation on représente les émissions de différents polluants (PM2.5, PM10, NO2 et O3) sur le territoire français de 2013 à 2020.
+          Sur cette visualisation on représente les émissions de différents polluants (PM2.5, PM10, NO2 et O3) sur le
+          territoire français de 2013 à 2020.
           Il est aussi possible de regarder l'évolution des émissions année par année pour une région donnée.
         </h4>
       </div>
-        <div class="row content">
-          <div class=" col slider-opt-1" id="viz1-opt1">
-            <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
-            <br/>
-            <span id="oneshot-span"></span>
-            <input autocomplete="off" class="slider" id="oneshot-slider" type="range" value="1" min="1" max="5" step="1" />
-            
+      <div class="row content">
+        <div class="slider-opt-1" id="viz1-opt1">
+          <label for="viz1-opt1">&eacute;volution au fil des ann&eacute;es</label>
+          <br />
+          <span id="oneshot-span"></span>
+          <input autocomplete="off" class="slider" id="oneshot-slider" type="range" step="1" />
 
-            <span class="polluant">
-              <span>polluant </span>
-                <select class="selectpicker map-polluant"id="polluant">
-                   
-                </select>
-            </span>
-          </div>
-          <div class="col viz1" id="carte1">      
-            
-          </div>
+
+
+
+        </div>
+        <div id="legende">
+          <span>
+            AQI(Air Quality Index)
+          </span>
+
+        </div>
+        <div class="row viz1" id="carte1">
 
         </div>
 
+        <span style="font-style: italic;" id="sources">
+          Source: <a style="text-decoration: none;"
+            href="https://aqicn.org/data-platform/register/?fbclid=IwAR3zROhce7YKS473CZb0mpBUr8lehZsWnEGIk_wjajVQ705wtZY_uV5_avI">
+            aqicn.org
+          </a>
+        </span>
+
       </div>
-      
-      
+
+    </div>
+
+
 
 
 
@@ -138,141 +148,128 @@
       </div>
 
       <div class="viz-summary">
-        <h3 class="col">Ici, vous pouvez calculer les émissions de gazs à effets de serre (GES) produites par un vol regional à l'interieur du territoire français en fonction d'une ville de départ, une ville d'arrivée et d'un modèle d'avion "court-courrier".
+        <h3 class="col">Ici, vous pouvez calculer les émissions de gazs à effets de serre (GES) produites par un vol
+          regional à l'interieur du territoire français en fonction d'une ville de départ, une ville d'arrivée et d'un
+          modèle d'avion "court-courrier".
 
         </h3>
       </div>
       <div class="row content">
         <div class="col slider-opt-1" id="viz3-opt">
           <label for="viz3-opt">selection du trajet</label>
-          <br/>
+          <br />
           <div class="option-calcu">
             <span id="span-depart">d&eacute;part</span>
-            <select class="selectpicker villes"id="depart">
-                   
+            <select class="selectpicker villes" id="depart">
+
             </select>
           </div>
-          
+
           <div class="option-calcu">
             <span>arriv&eacute;e</span>
-            <select class="selectpicker villes"id="arrivee">
-               
+            <select class="selectpicker villes" id="arrivee">
+
             </select>
           </div>
-          
-          <div class="option-calcu">
-            <span>modele d'avion</span>
-            <select class="selectpicker avions"id="avion">
-               
-            </select> 
-          </div>
-           
-          
 
-        
-     
+          <div class="option-calcu">
+            <span>avion</span>
+            <select class="selectpicker avions" id="avion">
+
+            </select>
+          </div>
+
+
+
+
+
         </div>
-        <div class="col viz1"  id="carteConsommation">
-            
+        <div class="col viz1" id="carteConsommation">
+
         </div>
-       
+
         <div class="col calcu-res">
-        
-          <p>emission de gazs à effet de serre (GES) en CO2 equivalent (Tonnes).
-              Le résulat obtenu est calculé en multipliant la consommation en fuel de l'appareil par un coefficient 3.16 (CO2) puis par un coefficient 1.22 pour l'équivalence CO2 avec les emissions de GES.
-          </p>
+
           <div class="result_conso_div hidden" id="resultat_conso">
             <h4 id="info-trajet"></h4>
             <h4 id="conso_amount"></h4>
+            <div id="equiv-icons">
+
+            </div>
+
+            <div class="calc-footer">
+              <p style="font-size:12px;">emission de gazs à effet de serre (GES) en CO2 equivalent (Tonnes).
+                Le résulat obtenu est calculé en multipliant la consommation en kerosène de l'appareil par un
+                coefficient 3.16 (CO2) puis par un coefficient 1.22 pour l'équivalence CO2 avec les emissions de GES.
+              </p>
+
+              <i class="fa fa-home" style="font-size:2em">
+                <p style="font-size: 10px">Consommation annulle moyenne d'un français pour chauffer son domicile</p>
+              </i>
+
+              <p>source: <a href="https://eco-calculateur.dta.aviation-civile.gouv.fr/comment-ca-marche"
+                  style="text-decoration:none; "> calculateur d'emissions de gazs a effets de serre</a></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-
-    <div class="row part_div">
-      <div class="part_header">
-
-        <h2 class="part_title">Conclusions</h2>
-        <button class="go-up" onclick="window.location.href='#'"><i class="fa fa-angle-double-up fa-5x go-up-btn"
-            aria-hidden="true"></i></button>
-      </div>
-
-      <div class="viz-summary">
-        <section id="services">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                <h2 class="section-heading"></h2>
-                <hr class="my-4" />
-              </div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row" style="margin-left: 110px;">
-
-              <h3 class="section-heading"> Tuto pour expliquer le fonctionnement du site </h2>
-            </div>
-          </div>
-        </section>
-      </div>
-
-    </div>
   </div>
 
 
-    <footer>
-      <section id="contact" style="padding: 1%;">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-              <hr class="my-4" />
-              <p class="presentation">
-                Voulez-vous voir les détails de ce projet? <br />
-                Avez-vous des questions? <br />
-                Visitez notre GitHub ou envoyez-nous un e-mail et nous
-                reviendrons vers vous dès que possible!
-              </p>
-            </div>
+  <footer>
+    <section id="contact" style="padding: 1%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <hr class="my-4" />
+            <p class="presentation">
+              Voulez-vous voir les détails de ce projet? <br />
+              Avez-vous des questions? <br />
+              Visitez notre GitHub ou envoyez-nous un e-mail et nous
+              reviendrons vers vous dès que possible!
+            </p>
           </div>
-          <div class="row">
-            <div id="gauche">
-              <i class="fa fa-github fa-3x mb-3"></i>
-              <p>
-                <a href="https://github.com/ly-ry">Lydia</a>
-              </p>
-              <p>
-                <a href="https://github.com/rym69">Ryma</a>
-              </p>
-              <p>
-                <a href="https://github.com/azouiaymen">Aymen</a>
-              </p>
-              <p>
-                <a href="https://github.com/vizenco">Vincent</a>
-              </p>
-            </div>
-            <div id="droite">
-              <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
-              <p>
-                <a href="mailto:lydiasaidj20@gmail.com">lydiasaidj20@gmail.com</a>
-              </p>
-              <p>
-                <a href="mailto:bouiche.rima@gmail.com">bouiche.rima@gmail.com</a>
-              </p>
-              <p>
-                <a href="mailto:azouiaymen97@gmail.com">azouiaimen97@gmail.com</a>
-              </p>
-              <p>
-                <a href="mailto:vincent.toinon@outlook.fr">vincent.toinon@outlook.fr</a>
-              </p>
-            </div>
+        </div>
+        <div class="row">
+          <div id="gauche">
+            <i class="fa fa-github fa-3x mb-3"></i>
+            <p>
+              <a href="https://github.com/ly-ry">Lydia</a>
+            </p>
+            <p>
+              <a href="https://github.com/rym69">Ryma</a>
+            </p>
+            <p>
+              <a href="https://github.com/azouiaymen">Aymen</a>
+            </p>
+            <p>
+              <a href="https://github.com/vizenco">Vincent</a>
+            </p>
           </div>
-        </section>
-      
-      </footer>
-      
-      <script src="js/viz1-3.js"></script>
-      <script src="js/viz-chart.js"></script>
-  
-      
+          <div id="droite">
+            <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="mailto:lydiasaidj20@gmail.com">lydiasaidj20@gmail.com</a>
+            </p>
+            <p>
+              <a href="mailto:bouiche.rima@gmail.com">bouiche.rima@gmail.com</a>
+            </p>
+            <p>
+              <a href="mailto:azouiaymen97@gmail.com">azouiaimen97@gmail.com</a>
+            </p>
+            <p>
+              <a href="mailto:vincent.toinon@outlook.fr">vincent.toinon@outlook.fr</a>
+            </p>
+          </div>
+        </div>
+    </section>
+
+  </footer>
+
+  <script src="js/viz1-3.js"></script>
+  <script src="js/viz-chart.js"></script>
+
+
 </body>
