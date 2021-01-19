@@ -1,4 +1,4 @@
-date,PM2.5,PM10,O3,NO2,region,filename,so2,co
+date,PM25,PM10,O3,NO2,region,filename,so2,co
 2020/12/1, 31, 14, 14, 10,provence-alpes-cote d'azur,./alpes-cote-dazur-est.csv,,
 2020/12/2, 30, 14, 17, 8,provence-alpes-cote d'azur,./alpes-cote-dazur-est.csv,,
 2020/12/3, 29, 10, 19, 10,provence-alpes-cote d'azur,./alpes-cote-dazur-est.csv,,

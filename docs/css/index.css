@@ -368,13 +368,50 @@ section {
 
 
 /*style pour les visus*/
+svg{
+  
+  border: 1px;
+  border-color: var(--ThemeColor-dark);
+
+}
 /** Visu 1*/
 .viz1 {
-  padding: auto;
+  padding-left: 2%;
   position: relative;
-  display: block;
+  display: inline-block;
+ 
 }
+#legende{
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  padding: 2%;
+}
+#jauge{
+  border-radius: 5%;
+  
+}
+#label-viz1{
+  position:absolute;
+  display: inline-block;
+  
+  width: 5%;
+ 
+  padding:1px;
+  background-color: var(--ThemeColor-dark);
+  color:white;
+  font-weight: bold;
+  border-bottom-right-radius: 10%;
+  border: solid 1px;
+  
+  
 
+}
+#sources{
+  position:relative ;
+  display:block;
+  float:left;
+}
 select {
 
   border: 1px;
@@ -398,7 +435,7 @@ select {
 
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("./images/cursor_icn.jpg");
+  background-image: url("../images/cursor_icn.jpg");
   height: 10px;
   border-radius: 5px;
   margin: auto;
@@ -412,9 +449,9 @@ select {
 
 
   position: relative;
-  padding: 1vw 0 1vw 0;
+  padding: 1vw 1vw 1vw 0;
   margin: 1vw 0 1vw 0;
-  display: block;
+  display: inline-block;
   border: 1px;
   border-radius: 5px;
   border-color: var(--ThemeColor-dark);
@@ -433,21 +470,7 @@ label {
 
 }
 
-.carte1 {
-  position: relative;
 
-}
-
-#carte {
-
-  height: 100%;
-  width: 100%;
-
-  margin: 1% 1% 5% 5%;
-  padding: auto;
-  float: left;
-
-}
 
 span {
   display: inline;
@@ -473,11 +496,15 @@ span {
 
 .point{
   position:absolute;
-}
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 
+}
 .option-calcu{
   display: inline-block;
-  margin: 2vw 0 2vw 0
+  text-align: left;
+  margin: 0.5vw 0 0.5vw 0
 }
 .calcu-res{
   position: relative;
@@ -490,13 +517,31 @@ span {
  
   border-style: solid;
  
-  color: var(--ThemeColor-dark);
+  
   font-weight: bold;
 }
 
-#conso_amount{
-  margin:1vw 0 1vw 0;
+#equiv-icons{
+  display: inline-block;
+  
+  
+  border-bottom: 2px;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  border-bottom-style: solid;
+  padding: 0 10px 0 5px;
+  margin-bottom: 15%;
 }
+
+.calc-footer{
+  
+  position: relative;
+  bottom: 0px;
+  text-align: center;
+  margin-bottom: -1%;
+  text-decoration: italic;
+}
+
 /*footer*/
 footer {
   display: inline-block;

@@ -6,15 +6,26 @@
             "properties": {
                 "model": "BOMBARDIER-CRJ700",
                 "speed_mach": "0.75",
-                "consommation_fuel_kg_s": "1.4214"
+                "LTO_conso":240,
+                "consommation_fuel_flying": "0.0643"
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "model": "EMBRAER-175",
+                "model": "EMBRAER-145",
+                "speed_mach": "0.78",
+                "LTO_conso":164,
+                "consommation_fuel_flying": "0.05"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "model": "EMBRAER-170",
                 "speed_mach": "0.75",
-                "consommation_fuel_kg_s": "1.744"
+                "LTO_conso":151,
+                "consommation_fuel_flying": "0.0449"
             }
         },
         {
@@ -22,7 +33,8 @@
             "properties": {
                 "model": "EMBRAER-190",
                 "speed_mach": "0.78",
-                "consommation_fuel_kg_s": "0.8114"
+                "LTO_conso":303,
+                "consommation_fuel_flying": "0.084"
             }
         }
     ]
