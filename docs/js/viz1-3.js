@@ -89,7 +89,7 @@ polluants.forEach((i) => {
 //DESSIN DES CARTES
 //
 // 
-var res = d3.json("/docs/data/france_regions.json").then(function (jsondata) {
+var res = d3.json("https://raw.githubusercontent.com/azouiaymen/Pollution-aviation/main/data/france_regions.json").then(function (jsondata) {
 
 
   polluants.forEach((i) => {
@@ -118,7 +118,7 @@ var res = d3.json("/docs/data/france_regions.json").then(function (jsondata) {
 //RECUPERATION DES DONNEES
 // ET INITIALISATION
 //
-d3.csv("/docs/data/resultat_final_bis.csv").then((data) => {
+d3.csv("https://raw.githubusercontent.com/azouiaymen/Pollution-aviation/main/data/resultat_final_bis.csv").then((data) => {
 
   colorize.domain([0, 60]);
 
@@ -136,7 +136,7 @@ d3.csv("/docs/data/resultat_final_bis.csv").then((data) => {
 
 
 
-  d3.json("/docs/data/france_regions.json").then((json) => {
+  d3.json("https://raw.githubusercontent.com/azouiaymen/Pollution-aviation/main/data/france_regions.json").then((json) => {
     var jour = days_list[0];
 
 
@@ -235,7 +235,7 @@ var projectionConso = d3.geoMercator()
 
 var pathConso = d3.geoPath().projection(projectionConso)
 
-var villes = d3.json("/docs/data/villes_fr.json").then((json) => {
+var villes = d3.json("https://raw.githubusercontent.com/azouiaymen/Pollution-aviation/main/data/villes_fr.json").then((json) => {
   var ret = []
   json.features.forEach((itm) => {
 
@@ -247,7 +247,7 @@ var villes = d3.json("/docs/data/villes_fr.json").then((json) => {
 
 
 });
-var planes = d3.json("/docs/data/engines.json").then((data) => {
+var planes = d3.json("https://raw.githubusercontent.com/azouiaymen/Pollution-aviation/main/data/engines.json").then((data) => {
   return data;
 });
 

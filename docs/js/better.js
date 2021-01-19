@@ -6,7 +6,7 @@ $("#regionButtContainerSelect").change(function () {
 
 function drawAllCharts() {
     polluants.forEach(function (d) {
-        getProperData(d, $("#regionButtContainerSelect").val())
+        getProperData(d.toLowerCase(), $("#regionButtContainerSelect").val())
             .then(function (dede) {
                 buildChart(dede, d)
             })
@@ -15,7 +15,6 @@ function drawAllCharts() {
 }
 
 function buildChart(entryData, poop) {
-
 
     const chartContainer = d3.select("#line_chart");
     const margin = { top: 10, right: 30, bottom: 30, left: 60 };
@@ -121,12 +120,12 @@ function getProperData(poluant, region) {
             .map(function (val) {
                 return { date: parseTime(val.date), value: parseInt(val[` ${poluant}`]) };
             })
-            .sort((a, b) => a.date > b.date);
+            .sort((a, b) => a.date > b.date)
+            .filter((d)=>d.value != " ")
     })
 }
 
 function getRegions() {
-    console.log("ca rentre")
     return d3.csv("https://raw.githubusercontent.com/azouiaymen/DataViz/main/data/resultat_final.csv").then(function (d) {
         return d;
     }).then(function (deez) {
