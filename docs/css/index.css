@@ -48,7 +48,7 @@ nav {
   height: 100px;
   width: 100%;
   margin-right: -0.4%;
-  background-image: url("../images/banniere-symbole-avion.jpg");
+  background-image: url("../images/banniere-symbole-avion.png");
   background-size: cover;
   background-position: 50%, 50%;
 
@@ -228,7 +228,7 @@ li a:hover {
 }
 
 .start-viz {
-  background-image: url("../images/zz.jpeg");
+  background-image: url("../images/zz.png");
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -435,7 +435,7 @@ select {
 
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("../images/cursor_icn.jpg");
+  background-image: url("../images/cursor_icn.png");
   height: 10px;
   border-radius: 5px;
   margin: auto;
