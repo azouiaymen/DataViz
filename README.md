@@ -1,6 +1,7 @@
 ## dataVizProject
+Aviation is considered as one of the most pollutant means of transportation in the world. 
+This project aims to visualize evolution of planes originated pollutants throughout the years from 2014 to 2020 on the fench territory (DOM-TOM's areas excluded).
 
-data visualisation for atmosphere pollution caused by plane pollution
 
 ## Authors
 
